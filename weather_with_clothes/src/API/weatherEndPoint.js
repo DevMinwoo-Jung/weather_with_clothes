@@ -1,0 +1,1 @@
+export const MID_TERM_END_POINT = "https://cors-anywhere.herokuapp.com/http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst?";

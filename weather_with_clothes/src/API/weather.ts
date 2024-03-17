@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import { MID_TERM_END_POINT } from './weatherEndPoint';
 
 export type shortLiveWeather = {
@@ -13,20 +12,22 @@ export type shortLiveWeather = {
 export type shortLiveWeatherParam ={
   numOfRows: string;
   pageNo: string;
+  regId: string;
   tmFc: string;
-  stnId: string;
   dataType?: string;
 }
 
-export const fetchShortLiveWeather = async ({ queryKey }) => {
+console.log(import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY)
+console.log(import.meta.env)
+console.log(import.meta)
 
-  const { numOfRows, pageNo, stnId, tmFc} = queryKey;
+export const fetchShortLiveWeather = async (shortLiveWeatherParam) => {
+
+ const { numOfRows, pageNo, regId, tmFc} = shortLiveWeatherParam;
 
   const res = await fetch(
-    `${MID_TERM_END_POINT}serviceKey=
-    numOfRows=${numOfRows}&pageNo=${pageNo}&stnId=${stnId}&tmFc=${tmFc}&dataType=JSON
+    `${MID_TERM_END_POINT}serviceKey=${import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&regId=${regId}&tmFc=${tmFc}&dataType=JSON
     `);
-
   if (!res.ok) {
     throw new Error('Network response was not ok');
   }
@@ -44,6 +45,6 @@ export const fetchShortLiveWeather = async ({ queryKey }) => {
   return shortLiveWeather;
 };
 
-export const useShortLiveWeather = (param:shortLiveWeatherParam) => {
-  return useQuery(['shortLiveWeather'], () => fetchShortLiveWeather(param));
-};
+// export const useShortLiveWeather = (param:shortLiveWeatherParam) => {
+//   return useQuery(['shortLiveWeather'], () => fetchShortLiveWeather(param));
+// };

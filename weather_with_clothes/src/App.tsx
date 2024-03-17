@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { shortLiveWeatherParam, useShortLiveWeather } from './API/weather';
+import { shortLiveWeatherParam, fetchShortLiveWeather } from './API/weather';
 import React from 'react';
 
 function App() {
 
   const [data, setData] = useState();
   const defaultParam:shortLiveWeatherParam = {
-    numOfRows: "1",
-    pageNo: "10",
-    stnId: "10",
-    tmFc: "1",
+    numOfRows: "10",
+    pageNo: "1",
+    regId: "11B10101",
+    tmFc: "202403170600",
     dataType: "JSON"
   }
 
   useEffect(()=> {
-    useShortLiveWeather(defaultParam)
+    fetchShortLiveWeather(defaultParam)
   }, [])
   return (
     <>

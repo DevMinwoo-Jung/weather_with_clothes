@@ -17,10 +17,6 @@ export type shortLiveWeatherParam ={
   dataType?: string;
 }
 
-console.log(import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY)
-console.log(import.meta.env)
-console.log(import.meta)
-
 export const fetchShortLiveWeather = async (shortLiveWeatherParam) => {
 
  const { numOfRows, pageNo, regId, tmFc} = shortLiveWeatherParam;
@@ -28,6 +24,7 @@ export const fetchShortLiveWeather = async (shortLiveWeatherParam) => {
   const res = await fetch(
     `${MID_TERM_END_POINT}serviceKey=${import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&regId=${regId}&tmFc=${tmFc}&dataType=JSON
     `);
+    
   if (!res.ok) {
     throw new Error('Network response was not ok');
   }

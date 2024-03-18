@@ -1,28 +1,15 @@
-import { MID_TERM_END_POINT } from './weatherEndPoint';
+import { useQuery } from '@tanstack/react-query';
+import { shortLiveWeather, shortLiveWeatherParam } from '../Utils/watherType';
+import { MID_TERM_TEMP_END_POINT } from './weatherEndPoint';
 
-export type shortLiveWeather = {
-  pageNo: string,
-  numOfRows: string,
-  totalCount: string,
-  resultCode: string,
-  resultMsg: string,
-  wfSv: string,
-};
 
-export type shortLiveWeatherParam ={
-  numOfRows: string;
-  pageNo: string;
-  regId: string;
-  tmFc: string;
-  dataType?: string;
-}
 
-export const fetchShortLiveWeather = async (shortLiveWeatherParam) => {
+export const fetchShortLiveWeather = async (shortLiveWeatherParam:shortLiveWeatherParam) => {
 
- const { numOfRows, pageNo, regId, tmFc} = shortLiveWeatherParam;
+const { numOfRows, pageNo, regId, tmFc} = shortLiveWeatherParam;
 
   const res = await fetch(
-    `${MID_TERM_END_POINT}serviceKey=${import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&regId=${regId}&tmFc=${tmFc}&dataType=JSON
+    `${MID_TERM_TEMP_END_POINT}serviceKey=${import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&regId=${regId}&tmFc=${tmFc}&dataType=JSON
     `);
     
   if (!res.ok) {
@@ -31,17 +18,21 @@ export const fetchShortLiveWeather = async (shortLiveWeatherParam) => {
   
   const data = await res.json();
 
-  const shortLiveWeather: shortLiveWeather = {
-    pageNo: data.pageNo,
-    numOfRows: data.numOfRows,
-    totalCount: data.totalCount,
-    resultCode: data.resultCode,
-    resultMsg: data.resultMsg,
-    wfSv: data.wfSv,
-  };
-  return shortLiveWeather;
+  return data;
 };
 
-// export const useShortLiveWeather = (param:shortLiveWeatherParam) => {
-//   return useQuery(['shortLiveWeather'], () => fetchShortLiveWeather(param));
-// };
+export const defaultParam:shortLiveWeatherParam = {
+  numOfRows: "10",
+  pageNo: "1",
+  regId: "11B10101",
+  tmFc: "202403180600",
+  dataType: "JSON"
+}
+
+
+export function useShortLiveWeather(defaultParam:shortLiveWeatherParam){
+  return useQuery ({
+    queryKey: ['post', defaultParam],
+    queryFn: () => fetchShortLiveWeather(defaultParam)
+  });
+}

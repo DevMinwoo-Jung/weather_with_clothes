@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { dailyWeatherInfoParam, shortLiveWeather, shortLiveWeatherParam } from '../Utils/watherType';
+import { dailyWeatherInfoParam, shortLiveWeatherParam } from '../Utils/watherType';
 import { DAILY_FORCAST_END_POINT, MID_TERM_TEMP_END_POINT } from './weatherEndPoint';
 
 const SERVICE_KEY = import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY;

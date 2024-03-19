@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
 import './App.css'
-import { defaultParam, useShortLiveWeather } from './API/weather';
+import { dailyInfoDefaultParam, defaultParam, useDailyWeatherInfo, useShortLiveWeather } from './API/weather';
 import React from 'react';
 
 function App() {
   const { status, data, error, isFetching } = useShortLiveWeather(defaultParam);
+  const { status:a, data:b, error:c, isFetching:d } = useDailyWeatherInfo(dailyInfoDefaultParam);
 
   useEffect(()=> {
-    console.log(status, data, error, isFetching)
+    console.log(status, data, error, isFetching);
+    console.log(a, b, c, d);
   }, [])
 
   return (

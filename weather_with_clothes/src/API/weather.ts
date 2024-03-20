@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { dailyWeatherInfoParam, shortLiveWeatherParam } from '../Utils/watherType';
 import { DAILY_FORCAST_END_POINT, MID_TERM_TEMP_END_POINT } from './weatherEndPoint';
+import { getCurrentDate, getOneWeek, getOneWeekAgo } from '../Utils/common';
 
 const SERVICE_KEY = import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY;
 
@@ -25,9 +26,10 @@ export const defaultParam:shortLiveWeatherParam = {
   numOfRows: "10",
   pageNo: "1",
   regId: "11B10101",
-  tmFc: "202403180600",
+  tmFc: getCurrentDate(),
   dataType: "JSON"
 }
+
 
 
 export function useShortLiveWeather(defaultParam:shortLiveWeatherParam){
@@ -42,8 +44,8 @@ export const dailyInfoDefaultParam:dailyWeatherInfoParam = {
   pageNo: "1",
   dataCd: "ASOS",
   dateCd: "DAY",
-  startDt: "20240315",
-  endDt: "20240317",
+  startDt: getOneWeek(),
+  endDt: getOneWeekAgo(),
   stnIds: "108"
 }
 

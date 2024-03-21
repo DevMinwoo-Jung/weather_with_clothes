@@ -24,3 +24,12 @@ export type dailyWeatherInfoParam = {
   endDt: string;
   stnIds: string;
 }
+
+export type todayWeatherInfoParam = {
+  pageNo: string;
+  numOfRows: string;
+  base_date: string;
+  base_time: string;
+  nx: string;
+  ny: string;
+}

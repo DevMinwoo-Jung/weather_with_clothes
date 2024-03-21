@@ -13,10 +13,19 @@ export function getCurrentDate() {
   return `${_year}${_month}${_date}${hours}`;
 }
 
+export function getTodayFullDate() {
+
+  const _year = year;
+  const _month = month
+  const _date  = date
+
+  return `${_year}${_month}${_date}`;
+}
+
 export function getOneWeekAgo() {
 
   let currentDate = dateObj
-  let sevenWeeksAgo = new Date(currentDate.getTime() + (8 * 24 * 60 * 60 * 1000));
+  let sevenWeeksAgo = new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000));
 
   let year = sevenWeeksAgo.getFullYear();
   let month = (sevenWeeksAgo.getMonth() + 1).toString().padStart(2, '0'); 

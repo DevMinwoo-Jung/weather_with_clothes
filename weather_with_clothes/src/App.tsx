@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './App.css'
+import './index.css'
 import { dailyInfoDefaultParam, defaultParam, todayInfoDefaultParam, useDailyWeatherInfo, useShortLiveWeather, useTodayWeatherInfo } from './API/weather';
 import React from 'react';
 import useGeolocation from './Utils/useGeolocation';
@@ -22,6 +22,7 @@ function App() {
 
   return (
     <div className='w-screen h-screen bg-slate-500'>
+      <h1 className='bg-red-400'>asdasdsa</h1>
       <Header/>
       <ChartExample/>
     </div>

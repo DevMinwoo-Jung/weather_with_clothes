@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './index.css'
 import { dailyInfoDefaultParam, defaultParam, todayInfoDefaultParam, useDailyWeatherInfo, useShortLiveWeather, useTodayWeatherInfo } from './API/weather';
 import React from 'react';
@@ -21,10 +21,11 @@ function App() {
   }, [])
 
   return (
-    <div className='w-screen h-screen bg-slate-500'>
-      <h1 className='bg-red-400'>asdasdsa</h1>
-      <Header/>
-      <ChartExample/>
+    <div className='min-w-screen min-h-screen bg-slate-500'>
+      <div className='mobile:block mobile:w-1/3 sm:flex sm:w-2/3 m-auto'>
+        <Header/>
+        <ChartExample/>
+      </div>
     </div>
   )
 }

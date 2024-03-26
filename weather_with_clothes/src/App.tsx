@@ -4,6 +4,7 @@ import { dailyInfoDefaultParam, defaultParam, todayInfoDefaultParam, useDailyWea
 import React from 'react';
 import useGeolocation from './Utils/useGeolocation';
 import ChartExample from './components/Chart/Chart';
+import Header from './components/Header';
 
 function App() {
   const { status, data, error, isFetching } = useShortLiveWeather(defaultParam);
@@ -20,10 +21,8 @@ function App() {
   }, [])
 
   return (
-    <div className='w-screen h-screen'>
-      <h1 className="text-3xl font-bold underline">
-        asdasd
-      </h1>
+    <div className='w-screen h-screen bg-slate-500'>
+      <Header/>
       <ChartExample/>
     </div>
   )

@@ -6,11 +6,12 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        fontWhite: "#FFFFFF"
+      }
+    },
     'mobile': '375px',
-    colors: {
-      fontWhite: "#FFFFFF"
-    }
   },
   plugins: [],
 }

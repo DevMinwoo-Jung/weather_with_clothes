@@ -23,7 +23,7 @@ function App() {
   return (
     <div className='min-w-screen min-h-screen bg-slate-500'>
       <div className='mobile:block mobile:w-1/3 sm:flex sm:w-2/3 m-auto'>
-        <Header/>
+        <Header/> 
         <ChartExample/>
       </div>
     </div>

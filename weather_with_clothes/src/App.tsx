@@ -18,13 +18,13 @@ function App() {
     console.log(a, b, c, d);
     console.log(aa, bb, cc, dd);
     console.log(userLocation);
-  }, [])
+  }, []);
 
   return (
     <div className='min-w-screen min-h-screen bg-slate-500'>
-      <div className='mobile:block mobile:w-1/3 sm:flex sm:w-2/3 m-auto'>
+      <div className='mobile:block mobile:w-1/3 sm:flex sm:w-2/3 m-auto p-4'>
         <Header/> 
-        <ChartExample/>
+        {/* <ChartExample/> */}
       </div>
     </div>
   )

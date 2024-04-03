@@ -5,6 +5,7 @@ import React from 'react';
 import useGeolocation from './Utils/useGeolocation';
 import ChartExample from './components/Chart/Chart';
 import Header from './components/Header';
+import Main from './components/Main';
 
 function App() {
   const { status, data, error, isFetching } = useShortLiveWeather(defaultParam);
@@ -21,10 +22,10 @@ function App() {
   }, []);
 
   return (
-    <div className='min-w-screen min-h-screen bg-slate-500'>
-      <div className='mobile:block mobile:w-1/3 sm:flex sm:w-2/3 m-auto p-4'>
+    <div className='min-w-screen min-h-screen bg-slate-500 text-white font-bold'>
+      <div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl'>
         <Header/> 
-        {/* <ChartExample/> */}
+        <Main/>
       </div>
     </div>
   )

@@ -3,7 +3,7 @@ import Home from './Icons/Home'
 
 export default function Header() {
   return (
-    <div className='flex font-bold text-white w-full'>
+    <div className='flex'>
       <div className='mr-6'><Home size="medium"/></div>
       <div className='text-2xl leading-10'>상봉동</div>
     </div>

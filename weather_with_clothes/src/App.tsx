@@ -6,6 +6,9 @@ import useGeolocation from './Utils/useGeolocation';
 import ChartExample from './components/Chart/Chart';
 import Header from './components/Header';
 import Main from './components/Main';
+import Summary from './components/Summary';
+import WeatherGraph from './components/WeatherGraph';
+import WeekSummary from './components/WeekSummary';
 
 function App() {
   const { status, data, error, isFetching } = useShortLiveWeather(defaultParam);
@@ -26,6 +29,9 @@ function App() {
       <div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl'>
         <Header/> 
         <Main/>
+        <WeatherGraph/>
+        <Summary/>
+        <WeekSummary/>
       </div>
     </div>
   )

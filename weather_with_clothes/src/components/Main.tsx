@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Main() {
   return (
-    <section className='flex mt-8'>
+    <section className='flex mt-8 h-48'>
       <div className='block w-1/2'>
         <p className='text-5xl'>19°</p>
         <p className='mt-4'>구름 많음</p>

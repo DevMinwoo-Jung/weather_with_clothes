@@ -80,7 +80,7 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
 
   export const todayInfoDefaultParam:todayWeatherInfoParam = {
     pageNo: "1",
-    numOfRows: "10",
+    numOfRows: "1000",
     base_date: getTodayFullDate(),
     base_time: "0500",
     nx: "55",
@@ -103,7 +103,7 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
       }
       
       const data = await res.json();
-    
+      
       return data;
     };
   

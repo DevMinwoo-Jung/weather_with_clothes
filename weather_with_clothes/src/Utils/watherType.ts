@@ -27,7 +27,7 @@ export type dailyWeatherInfoParam = {
 
 export type todayWeatherInfoParam = {
   pageNo: string;
-  numOfRows: string;
+  numOfRows: string | number;
   base_date: string;
   base_time: string;
   nx: string;

@@ -23,7 +23,7 @@ const { numOfRows, pageNo, regId, tmFc} = shortLiveWeatherParam;
 };
 
 export const defaultParam:shortLiveWeatherParam = {
-  numOfRows: "10",
+  numOfRows: "1000",
   pageNo: "1",
   regId: "11B10101",
   tmFc: getCurrentDate(),
@@ -41,7 +41,7 @@ export function useShortLiveWeather(defaultParam:shortLiveWeatherParam){
 
 // 이건 필요 없을거 같은데...?
 export const dailyInfoDefaultParam:dailyWeatherInfoParam = {
-  numOfRows: "10",
+  numOfRows: "1000",
   pageNo: "1",
   dataCd: "ASOS",
   dateCd: "DAY",
@@ -94,9 +94,10 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
     const { numOfRows, pageNo, base_date, base_time, nx, ny} = todayInfoDefaultParam;
     
       const res = await fetch(
-        `${TODAY_FORCAST_END_POINT}serviceKey=${SERVICE_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}
-        &dataType=JSON&base_date=${base_date}&base_time=${base_time}&nx=${nx}&ny=${ny}
+        `${TODAY_FORCAST_END_POINT}serviceKey=${SERVICE_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&dataType=JSON&base_date=${base_date}&base_time=${base_time}&nx=${nx}&ny=${ny}
         `);
+
+        //&pageNo=1&numOfRows=1000&dataType=XML&base_date=20240406&base_time=0500&nx=55&ny=127
         
       if (!res.ok) {
         throw new Error('Network response was not ok');

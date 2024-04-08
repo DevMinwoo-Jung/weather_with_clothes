@@ -127,7 +127,6 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
       const todayForcast = data.response.body.items.item.filter((ele) => ele.fcstDate === getTodayFullDate());
       const tomorrowForcast = data.response.body.items.item.filter((ele) => ele.fcstDate === getTmorrowFullDate());
 
-      console.log(data)
       return { todayForcast, tomorrowForcast }
     };
   

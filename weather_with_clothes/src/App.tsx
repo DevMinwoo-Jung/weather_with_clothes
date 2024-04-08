@@ -7,7 +7,7 @@ import ChartExample from './components/Chart/Chart';
 import Header from './components/Header';
 import Main from './components/Main';
 import Summary from './components/Summary';
-import WeatherGraph from './components/WeatherGraph';
+import TwentyFourWeatherGraph from './components/TwentyFourWeatherGraph';
 import WeekSummary from './components/WeekSummary';
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
       <div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl'>
         <Header/> 
         <Main/>
-        <WeatherGraph/>
+        <TwentyFourWeatherGraph/>
         <Summary/>
         <WeekSummary/>
       </div>

@@ -19,7 +19,19 @@ export function getTodayFullDate() {
   const _month = month
   const _date  = date
 
+  console.log(`${_year}${_month}${_date}`);
   return `${_year}${_month}${_date}`;
+}
+
+export function getTmorrowFullDate() {
+  
+  const dateObj = new Date(new Date().getTime() + 24 * 60 * 60 * 1000); // 하루의 밀리초 24시간 60분 60초 1000밀리초, 이걸 getTime에 더하면 정확히 하루 뒤 return
+  const year = dateObj.getFullYear();
+  const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+  const date  = (dateObj.getDate()).toString().padStart(2, '0');
+
+  console.log(`${year}${month}${date}`);
+  return `${year}${month}${date}`;
 }
 
 export function getOneWeekAgo() {

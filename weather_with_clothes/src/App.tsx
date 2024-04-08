@@ -18,10 +18,15 @@ function App() {
   const { userLocation } = useGeolocation();
 
   useEffect(()=> {
-    console.log(status, data, error, isFetching);
-    console.log(a, b, c, d);
-    console.log(aa, bb, cc, dd);
-    console.log(userLocation);
+    // console.log(status, data, error, isFetching);
+    // console.log(a, b, c, d);
+    // console.log(aa, bb, cc, dd);
+    // console.log(userLocation);
+
+    console.log(aa, bb, cc, dd)
+
+    console.log(bb?.todayForcast, bb?.tomorrowForcast)
+    
   }, []);
 
   return (

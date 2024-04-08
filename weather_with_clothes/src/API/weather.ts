@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { dailyWeatherInfoParam, shortLiveWeatherParam, todayWeatherInfoParam } from '../Utils/watherType';
 import { DAILY_FORCAST_END_POINT, MID_TERM_TEMP_END_POINT, TODAY_FORCAST_END_POINT } from './weatherEndPoint';
-import { getCurrentDate, getOneWeek, getOneWeekAgo, getTodayFullDate } from '../Utils/common';
+import { getCurrentDate, getOneWeek, getOneWeekAgo, getTmorrowFullDate, getTodayFullDate } from '../Utils/common';
 
 const SERVICE_KEY = import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY;
 
@@ -88,6 +88,27 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
   }
   
   
+//   POP	강수확률	%
+// PTY	강수형태	코드값
+// PCP	1시간 강수량	범주 (1 mm)
+// REH	습도	%
+// SNO	1시간 신적설	범주(1 cm)
+// SKY	하늘상태	코드값
+// TMP	1시간 기온	℃
+// TMN	일 최저기온	℃
+// TMX	일 최고기온	℃
+// UUU	풍속(동서성분)	m/s
+// VVV	풍속(남북성분)	m/s
+// WAV	파고	M
+// VEC	풍향	deg
+// WSD	풍속	m/s
+// baseTime	발표시각
+// fcstDate	예보일자
+// fcstTime	예보시각
+// category	자료구분문자
+// fcstValue	예보 값
+// nx	예보지점 X 좌표
+// ny	예보지점 Y 좌표
   
   export const fetchTodayWeatherInfo = async (todayInfoDefaultParam:todayWeatherInfoParam) => {
   
@@ -96,8 +117,6 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
       const res = await fetch(
         `${TODAY_FORCAST_END_POINT}serviceKey=${SERVICE_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&dataType=JSON&base_date=${base_date}&base_time=${base_time}&nx=${nx}&ny=${ny}
         `);
-
-        //&pageNo=1&numOfRows=1000&dataType=XML&base_date=20240406&base_time=0500&nx=55&ny=127
         
       if (!res.ok) {
         throw new Error('Network response was not ok');
@@ -105,7 +124,11 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
       
       const data = await res.json();
       
-      return data;
+      const todayForcast = data.response.body.items.item.filter((ele) => ele.fcstDate === getTodayFullDate());
+      const tomorrowForcast = data.response.body.items.item.filter((ele) => ele.fcstDate === getTmorrowFullDate());
+
+      console.log(data)
+      return { todayForcast, tomorrowForcast }
     };
   
     export function useTodayWeatherInfo(todayInfoDefaultParam:todayWeatherInfoParam){

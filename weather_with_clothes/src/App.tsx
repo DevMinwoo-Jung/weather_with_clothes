@@ -25,7 +25,6 @@ function App() {
 
     console.log(aa, bb, cc, dd)
 
-    console.log(bb?.todayForcast, bb?.tomorrowForcast)
     
   }, []);
 

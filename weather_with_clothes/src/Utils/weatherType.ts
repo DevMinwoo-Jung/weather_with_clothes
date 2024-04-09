@@ -33,3 +33,14 @@ export type todayWeatherInfoParam = {
   nx: string;
   ny: string;
 }
+
+export type twentyFourHourData ={
+  baseDate: string;
+  baseTieme: string;
+  category: string;
+  fcstDate: string;
+  fcstTime: string;
+  fcstValue: string;
+  nx: number;
+  ny: number;
+}

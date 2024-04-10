@@ -85,8 +85,8 @@ function useGeolocation() {
               const { latitude, longitude } = position.coords;
               // update the value of userlocation variable
               setUserLocation(dfs_xy_conv("toXY", latitude, longitude));
-              console.log(userLocation);
-              console.log(dfs_xy_conv("toXY", latitude, longitude))
+              // console.log(userLocation);
+              // console.log(dfs_xy_conv("toXY", latitude, longitude))
             },
             // if there was an error getting the users location
             (error) => {

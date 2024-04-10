@@ -1,7 +1,11 @@
+import { twentyFourHourData } from "./weatherType";
+
 const dateObj = new Date();
 const year = dateObj.getFullYear();
 const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
 const date  = (dateObj.getDate()).toString().padStart(2, '0');
+const TODAY_FULL_DATE = getTodayFullDate();
+const TOMORROW_FULL_DATE = getTodayFullDate();
 
 export function getCurrentDate() {
 
@@ -19,12 +23,11 @@ export function getTodayFullDate() {
   const _month = month
   const _date  = date
 
-  console.log(`${_year}${_month}${_date}`);
   return `${_year}${_month}${_date}`;
 }
 
 export function getTmorrowFullDate() {
-  
+
   const dateObj = new Date(new Date().getTime() + 24 * 60 * 60 * 1000); // 하루의 밀리초 24시간 60분 60초 1000밀리초, 이걸 getTime에 더하면 정확히 하루 뒤 return
   const year = dateObj.getFullYear();
   const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
@@ -53,4 +56,54 @@ export function getOneWeek() {
   const oneDayAgo = new Date(dateObj.getTime() - (1 * 24 * 60 * 60 * 1000)).getDate();
 
   return `${_year}${_month}${oneDayAgo}`;
+}
+
+// 24시간 가져오기
+export function getTwentyHours(data:twentyFourHourData[]) {
+  
+  console.log(data)
+
+  let todayData:twentyFourHourData[] = [];
+  let tomorrowData:twentyFourHourData[] = [];
+
+  data.map((ele:twentyFourHourData)=> {
+      if(ele.fcstDate === TODAY_FULL_DATE && compareGPSTimes(ele.fcstTime.slice(0, 2), getNowHours()) === 1) {
+        todayData.push(ele);
+      } else if(ele.fcstDate !== TODAY_FULL_DATE && compareGPSTimes(ele.fcstTime.slice(0, 2), getNowHours()) === -1) {
+        tomorrowData.push(ele);
+      }
+  })
+
+  console.log(todayData)
+
+  return todayData.concat(tomorrowData);
+
+}
+
+export function getNowHours() {
+
+  const NowHours = new Date().getHours();
+
+  if(NowHours < 10) {
+    return `0${NowHours}`
+  } else {
+    return NowHours;
+  }
+
+}
+
+function compareGPSTimes(time1, time2) {
+  // Adjust for GPS time wraparound (86400 seconds in a day)
+  console.log(time1, time2)
+  time1 = (Number(time1) + 86400) % 86400;
+  time2 = (Number(time2) + 86400) % 86400;
+
+
+  if (time1 < time2) {
+      return -1;
+  } else if (time1 > time2) {
+      return 1;
+  } else {
+      return 0;
+  }
 }

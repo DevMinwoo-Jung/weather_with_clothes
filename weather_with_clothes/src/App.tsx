@@ -22,9 +22,6 @@ function App() {
     // console.log(a, b, c, d);
     // console.log(aa, bb, cc, dd);
     // console.log(userLocation);
-
-    console.log(aa, bb, cc, dd)
-
     
   }, []);
 

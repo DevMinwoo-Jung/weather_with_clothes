@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { dailyWeatherInfoParam, shortLiveWeatherParam, todayWeatherInfoParam } from '../Utils/watherType';
 import { DAILY_FORCAST_END_POINT, MID_TERM_TEMP_END_POINT, TODAY_FORCAST_END_POINT } from './weatherEndPoint';
 import { getCurrentDate, getOneWeek, getOneWeekAgo, getTmorrowFullDate, getTodayFullDate } from '../Utils/common';
+import { twentyFourHourData } from '../Utils/weatherType';
 
 const SERVICE_KEY = import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY;
 
@@ -124,7 +125,7 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
       
       const data = await res.json();
       
-      const todayForcast = data.response.body.items.item.filter((ele) => ele.fcstDate === getTodayFullDate());
+      const todayForcast = data.response.body.items.item.filter((ele:twentyFourHourData) => ele.fcstDate === getTodayFullDate());
       const tomorrowForcast = data.response.body.items.item.filter((ele) => ele.fcstDate === getTmorrowFullDate());
 
       const resultData = todayForcast.concat(tomorrowForcast);

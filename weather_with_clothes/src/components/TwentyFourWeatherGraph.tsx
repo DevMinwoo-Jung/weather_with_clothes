@@ -7,15 +7,14 @@ export default function TwentyFourWeatherGraph() {
 
   const { status, data, error, isFetching } = useTodayWeatherInfo(todayInfoDefaultParam);
   const [twentyFourHourData, setTwentyFourHourData] = useState<twentyFourHourData[]>([]);
+  const arrayLength = 24;
   let example:any = "";
 
   useEffect(()=>{
-
     example = getTwentyHours(data);
-    console.log(example)
-
-    setTwentyFourHourData(example);
+    // setTwentyFourHourData(example);
     console.log(twentyFourHourData);
+    
   }, [])
 
 

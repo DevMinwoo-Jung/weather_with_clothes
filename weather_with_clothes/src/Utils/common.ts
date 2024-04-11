@@ -61,8 +61,6 @@ export function getOneWeek() {
 // 24시간 가져오기
 export function getTwentyHours(data:twentyFourHourData[]) {
   
-  console.log(data)
-
   let todayData:twentyFourHourData[] = [];
   let tomorrowData:twentyFourHourData[] = [];
 
@@ -74,7 +72,35 @@ export function getTwentyHours(data:twentyFourHourData[]) {
       }
   })
 
+  const sample:any = [];
   console.log(todayData)
+  todayData.map((ele)=>{
+    if(!data[ele.fcstTime]) {
+      console.log('여기 한번이지?')
+      sample[ele.fcstTime] = {}
+
+      // if(!sample[ele.fcstDate].keys(ele.nx)){
+      //   sample[ele.fcstDate] = {
+      //     nx: ele.nx
+      //   }
+      // }
+
+      // if(!sample[ele.fcstDate].keys(ele.ny)){
+      //   sample[ele.fcstDate] = {
+      //     ny: ele.ny
+      //   }
+      // }
+    } else {
+      sample[ele.fcstTime] = {
+        ...sample[ele.fcstTime],
+        
+          [ele.category] : [ele.fcstValue]
+        
+      }
+    }
+  })
+
+  console.log(sample)
 
   return todayData.concat(tomorrowData);
 

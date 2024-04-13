@@ -13,7 +13,6 @@ export default function TwentyFourWeatherGraph() {
   useEffect(()=>{
     example = getTwentyHours(data);
     // setTwentyFourHourData(example);
-    console.log(twentyFourHourData);
     
   }, [])
 

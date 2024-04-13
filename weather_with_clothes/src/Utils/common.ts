@@ -58,51 +58,32 @@ export function getOneWeek() {
   return `${_year}${_month}${oneDayAgo}`;
 }
 
-// 24시간 가져오기
+// converting한 24시간 데이터 가져오기
 export function getTwentyHours(data:twentyFourHourData[]) {
   
   let todayData:twentyFourHourData[] = [];
   let tomorrowData:twentyFourHourData[] = [];
-
+  let resultData:any = {};
+  
   data.map((ele:twentyFourHourData)=> {
-      if(ele.fcstDate === TODAY_FULL_DATE && compareGPSTimes(ele.fcstTime.slice(0, 2), getNowHours()) === 1) {
-        todayData.push(ele);
-      } else if(ele.fcstDate !== TODAY_FULL_DATE && compareGPSTimes(ele.fcstTime.slice(0, 2), getNowHours()) === -1) {
-        tomorrowData.push(ele);
-      }
-  })
-
-  const sample:any = [];
-  console.log(todayData)
-  todayData.map((ele)=>{
-    if(!data[ele.fcstTime]) {
-      console.log('여기 한번이지?')
-      sample[ele.fcstTime] = {}
-
-      // if(!sample[ele.fcstDate].keys(ele.nx)){
-      //   sample[ele.fcstDate] = {
-      //     nx: ele.nx
-      //   }
-      // }
-
-      // if(!sample[ele.fcstDate].keys(ele.ny)){
-      //   sample[ele.fcstDate] = {
-      //     ny: ele.ny
-      //   }
-      // }
-    } else {
-      sample[ele.fcstTime] = {
-        ...sample[ele.fcstTime],
-        
-          [ele.category] : [ele.fcstValue]
-        
-      }
+    if(ele.fcstDate === TODAY_FULL_DATE && compareGPSTimes(ele.fcstTime.slice(0, 2), getNowHours()) === 1) {
+      todayData.push(ele);
+    } else if(ele.fcstDate !== TODAY_FULL_DATE && compareGPSTimes(ele.fcstTime.slice(0, 2), getNowHours()) === -1) {
+      tomorrowData.push(ele);
     }
   })
+  
+  
+  const tomorrowConvertData:any = convertDataToTimeObject(todayData);
+  const todayConvertData:any =  convertDataToTimeObject(tomorrowData);
+  
+  resultData = '';
+  
+  console.log(tomorrowConvertData)
+  console.log(todayConvertData)
+  console.log(resultData)
 
-  console.log(sample)
-
-  return todayData.concat(tomorrowData);
+  return resultData;
 
 }
 
@@ -118,18 +99,37 @@ export function getNowHours() {
 
 }
 
+
 function compareGPSTimes(time1, time2) {
   // Adjust for GPS time wraparound (86400 seconds in a day)
-  console.log(time1, time2)
   time1 = (Number(time1) + 86400) % 86400;
   time2 = (Number(time2) + 86400) % 86400;
 
 
   if (time1 < time2) {
       return -1;
-  } else if (time1 > time2) {
+  } else if (time1 >= time2) {
       return 1;
   } else {
       return 0;
   }
 }
+
+function convertDataToTimeObject(data) {
+  const convertedData = {};
+
+  data.forEach(ele => {
+    if (!convertedData[ele.fcstTime]) {
+      convertedData[ele.fcstTime] = {};
+    }
+    
+    if (!convertedData[ele.fcstTime][ele.category]) {
+      convertedData[ele.fcstTime][ele.category] = '';
+    }
+    
+    convertedData[ele.fcstTime][ele.category] = ele.fcstValue;
+  });
+
+  return convertedData;
+}
+

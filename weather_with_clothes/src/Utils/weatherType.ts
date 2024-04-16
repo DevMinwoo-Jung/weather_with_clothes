@@ -44,3 +44,24 @@ export type twentyFourHourData ={
   nx: number;
   ny: number;
 }
+
+export type twentyFourHourResult = {
+  todayConvertData: hourResult;
+  tomorrowConvertData: hourResult;
+  arrayLength: number;
+}
+
+export type hourResult = {
+  TMP: string;
+  UUU: string;
+  VVV: string;
+  VEC: string;
+  WSD: string;
+  SKY: string;
+  PTY: string;
+  POP: string;
+  WAV: string;
+  PCP: string;
+  REH: string;
+  SNO: string;
+}

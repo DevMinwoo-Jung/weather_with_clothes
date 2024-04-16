@@ -5,6 +5,8 @@ import { getCurrentDate, getOneWeek, getOneWeekAgo, getTmorrowFullDate, getToday
 import { twentyFourHourData } from '../Utils/weatherType';
 
 const SERVICE_KEY = import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY;
+const FULL_TODAY =  getTodayFullDate();
+const FULL_TOMORROW = getTmorrowFullDate();
 
 export const fetchShortLiveWeather = async (shortLiveWeatherParam:shortLiveWeatherParam) => {
 
@@ -125,8 +127,8 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
       
       const data = await res.json();
       
-      const todayForcast = data.response.body.items.item.filter((ele:twentyFourHourData) => ele.fcstDate === getTodayFullDate());
-      const tomorrowForcast = data.response.body.items.item.filter((ele) => ele.fcstDate === getTmorrowFullDate());
+      const todayForcast = data.response.body.items.item.filter((ele:twentyFourHourData) => ele.fcstDate === FULL_TODAY);
+      const tomorrowForcast = data.response.body.items.item.filter((ele) => ele.fcstDate === FULL_TOMORROW);
 
       const resultData = todayForcast.concat(tomorrowForcast);
 

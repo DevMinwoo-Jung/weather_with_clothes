@@ -33,7 +33,6 @@ export function getTmorrowFullDate() {
   const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
   const date  = (dateObj.getDate()).toString().padStart(2, '0');
 
-  console.log(`${year}${month}${date}`);
   return `${year}${month}${date}`;
 }
 
@@ -74,15 +73,12 @@ export function getTwentyHours(data:twentyFourHourData[]) {
   })
   
   
-  const tomorrowConvertData:any = convertDataToTimeObject(todayData);
-  const todayConvertData:any =  convertDataToTimeObject(tomorrowData);
-  
-  resultData = '';
-  
-  console.log(tomorrowConvertData)
-  console.log(todayConvertData)
-  console.log(resultData)
+  const todayConvertData:any = convertDataToTimeObject(todayData);
+  const tomorrowConvertData:any =  convertDataToTimeObject(tomorrowData);
+  const arrayLength:number = Object.keys(todayConvertData).length + Object.keys(tomorrowConvertData).length;
 
+  resultData = {todayConvertData, tomorrowConvertData, arrayLength}
+  
   return resultData;
 
 }
@@ -106,9 +102,9 @@ function compareGPSTimes(time1, time2) {
   time2 = (Number(time2) + 86400) % 86400;
 
 
-  if (time1 < time2) {
+  if (time1 <= time2) {
       return -1;
-  } else if (time1 >= time2) {
+  } else if (time1 > time2) {
       return 1;
   } else {
       return 0;

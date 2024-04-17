@@ -17,14 +17,6 @@ function App() {
 
   const { userLocation } = useGeolocation();
 
-  useEffect(()=> {
-    // console.log(status, data, error, isFetching);
-    // console.log(a, b, c, d);
-    // console.log(aa, bb, cc, dd);
-    // console.log(userLocation);
-    
-  }, []);
-
   return (
     <div className='min-w-screen min-h-screen bg-slate-500 text-white font-bold'>
       <div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl'>

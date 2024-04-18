@@ -52,6 +52,7 @@ export type twentyFourHourResult = {
 }
 
 export type hourResult = {
+  TIME: string;
   TMP: string;
   UUU: string;
   VVV: string;

@@ -13,6 +13,8 @@ export default {
     },
     'mobile': '375px',
   },
-  plugins: [],
+  plugins: [
+    ('tailwind-scrollbar-hide')
+  ],
 }
 

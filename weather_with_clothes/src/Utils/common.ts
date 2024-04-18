@@ -117,6 +117,7 @@ function convertDataToTimeObject(data) {
   data.forEach(ele => {
     if (!convertedData[ele.fcstTime]) {
       convertedData[ele.fcstTime] = {};
+      convertedData[ele.fcstTime]["TIME"] = convertTimeToTwentyFourHour(ele.fcstTime);
     }
     
     if (!convertedData[ele.fcstTime][ele.category]) {
@@ -129,3 +130,23 @@ function convertDataToTimeObject(data) {
   return convertedData;
 }
 
+function convertTimeToTwentyFourHour(time:string){
+
+  //console.log(time)
+
+  const hour = Number(time.slice (0, 2));
+
+  console.log(hour)
+
+  if(hour <= 12) {
+    if(hour === 0) {
+      return `오전 ${12}`;
+    } else {
+      return `오전 ${hour}`;
+    }
+    
+  } else  {
+    return `오후 ${hour % 12}`;
+  }
+
+}

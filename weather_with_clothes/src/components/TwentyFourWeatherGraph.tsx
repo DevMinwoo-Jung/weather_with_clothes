@@ -16,50 +16,34 @@ export default function TwentyFourWeatherGraph() {
 
   if(error) return <div>Error</div>
 
+  console.log(twentyFourHourData)
 
   return (
     <div className='pt-2 pb-2 pl-6 pr-6 rounded-2xl h-40 border-2'>
       <p className='mb-2'>밤에도 맑은 날씨가 이어져요</p>
       <div className='border-t-2 mb-2'></div>
-      <div className='flex'>
+      <div className='flex overflow-x-scroll no-scrollbar'>
       {twentyFourHourData && (
         <>
           {Object.values(twentyFourHourData.todayConvertData).map((data: any, index) => {
-            const { PCP, POP, PTY, REH, SKY, SNO, TMP, UUU, VEC, VVV, WAV, WSD } = data;
+            const { POP, TMP, REH, TIME } = data;
             return (
               <div key={index}> {/* 각각의 요소에 key 추가 */}
-                <span>{index}</span>
-                <span>{PCP}</span>
-                <span>{POP}</span>
-                <span>{PTY}</span>
-                <span>{REH}</span>
-                <span>{SKY}</span>
-                <span>{SNO}</span>
-                <span>{TMP}</span>
-                <span>{UUU}</span>
-                <span>{VEC}</span>
-                <span>{VVV}</span>
-                <span>{WAV}</span>
-                <span>{WSD}</span>
+                <span>{TIME}</span>
+                <p>{TMP}</p>
+                <p>{POP}</p>
+                <p>{REH}</p>
               </div>
             );
           })}
           {Object.values(twentyFourHourData.tomorrowConvertData).map((data: any, index) => {
-            const { PCP, POP, PTY, REH, SKY, SNO, TMP, UUU, VEC, VVV, WAV, WSD } = data;
+            const { POP, TMP, REH, TIME } = data;
             return (
               <div key={index}> {/* 각각의 요소에 key 추가 */}
-                <span>{PCP}</span>
-                <span>{POP}</span>
-                <span>{PTY}</span>
-                <span>{REH}</span>
-                <span>{SKY}</span>
-                <span>{SNO}</span>
-                <span>{TMP}</span>
-                <span>{UUU}</span>
-                <span>{VEC}</span>
-                <span>{VVV}</span>
-                <span>{WAV}</span>
-                <span>{WSD}</span>
+                <span>{TIME}</span>
+                <p>{TMP}</p>
+                <p>{POP}</p>
+                <p>{REH}</p>
               </div>
             );
           })}

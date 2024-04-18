@@ -91,7 +91,7 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
   }
   
   
-//   POP	강수확률	%
+// POP	강수확률	%
 // PTY	강수형태	코드값
 // PCP	1시간 강수량	범주 (1 mm)
 // REH	습도	%

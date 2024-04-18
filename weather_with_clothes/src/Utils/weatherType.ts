@@ -52,17 +52,17 @@ export type twentyFourHourResult = {
 }
 
 export type hourResult = {
-  TIME: string;
-  TMP: string;
-  UUU: string;
-  VVV: string;
-  VEC: string;
-  WSD: string;
-  SKY: string;
-  PTY: string;
-  POP: string;
-  WAV: string;
-  PCP: string;
-  REH: string;
-  SNO: string;
+  TIME?: string;
+  TMP?: string;
+  UUU?: string;
+  VVV?: string;
+  VEC?: string;
+  WSD?: string;
+  SKY?: string;
+  PTY?: string;
+  POP?: string;
+  WAV?: string;
+  PCP?: string;
+  REH?: string;
+  SNO?: string;
 }

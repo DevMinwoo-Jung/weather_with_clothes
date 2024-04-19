@@ -25,7 +25,6 @@ export default function TwentyFourWeatherGraph() {
       <div className='flex overflow-x-scroll no-scrollbar whitespace-nowrap'>
       {twentyFourHourData && (
         <>
-
           <Hour twentyFourHourData={twentyFourHourData} type='today'/>
           <Hour twentyFourHourData={twentyFourHourData} type='tomorrow'/>
         </>

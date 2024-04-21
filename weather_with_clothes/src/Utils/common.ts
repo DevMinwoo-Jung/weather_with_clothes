@@ -118,6 +118,7 @@ function convertDataToTimeObject(data) {
     if (!convertedData[ele.fcstTime]) {
       convertedData[ele.fcstTime] = {};
       convertedData[ele.fcstTime]["TIME"] = convertTimeToTwentyFourHour(ele.fcstTime);
+      convertedData[ele.fcstTime]["TIME_24"] = Number(ele.fcstTime);
     }
     
     if (!convertedData[ele.fcstTime][ele.category]) {

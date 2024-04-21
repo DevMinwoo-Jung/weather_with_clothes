@@ -1,4 +1,5 @@
 import React from 'react'
+import { hourResult } from '../../Utils/weatherType';
 
 type HourType = {
   twentyFourHourData: any;
@@ -9,7 +10,20 @@ export default function Hour(props:HourType) {
 
   const { todayConvertData, tomorrowConvertData } = props.twentyFourHourData;
 
-  const type = props.type === 'today' ? todayConvertData : tomorrowConvertData;
+  let type = props.type === 'today' ? todayConvertData : tomorrowConvertData;
+
+  if (type === tomorrowConvertData) {
+    type = Object.values(type).sort((a:any, b:any) => {
+      if (Number(a.TIME_24) > Number(b.TIME_24)) {
+        return 1;
+      }
+      if (a.TIME_24 < b.TIME_24) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    }
+  )}
 
   return (
     <>

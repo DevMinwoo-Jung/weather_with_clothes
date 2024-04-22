@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import './index.css'
-import { dailyInfoDefaultParam, defaultParam, todayInfoDefaultParam, useDailyWeatherInfo, useShortLiveWeather, useTodayWeatherInfo } from './API/weather';
+import { dailyInfoDefaultParam, todayInfoDefaultParam, useDailyWeatherInfo, useShortLiveWeather, useTodayWeatherInfo } from './API/weather';
 import React from 'react';
 import useGeolocation from './Utils/useGeolocation';
 import ChartExample from './components/Chart/Chart';
@@ -11,9 +11,9 @@ import TwentyFourWeatherGraph from './components/TwentyFourWeatherGraph';
 import WeekSummary from './components/WeekSummary';
 
 function App() {
-  const { status, data, error, isFetching } = useShortLiveWeather(defaultParam);
-  const { status:a, data:b, error:c, isFetching:d } = useDailyWeatherInfo(dailyInfoDefaultParam);
-  const { status:aa, data:bb, error:cc, isFetching:dd } = useTodayWeatherInfo(todayInfoDefaultParam);
+  // const { status, data, error, isFetching } = useShortLiveWeather(defaultParam);
+  // const { status:a, data:b, error:c, isFetching:d } = useDailyWeatherInfo(dailyInfoDefaultParam);
+  // const { status:aa, data:bb, error:cc, isFetching:dd } = useTodayWeatherInfo(todayInfoDefaultParam);
 
   const { userLocation } = useGeolocation();
 

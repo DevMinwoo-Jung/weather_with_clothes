@@ -133,11 +133,7 @@ function convertDataToTimeObject(data) {
 
 function convertTimeToTwentyFourHour(time:string){
 
-  //console.log(time)
-
   const hour = Number(time.slice (0, 2));
-
-  console.log(hour)
 
   if(hour <= 12) {
     if(hour === 0) {

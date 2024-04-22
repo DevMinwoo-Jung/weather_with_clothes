@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { dailyWeatherInfoParam, shortLiveWeatherParam, todayWeatherInfoParam } from '../Utils/watherType';
+import { dailyWeatherInfoParam, shortLiveWeatherParam, todayWeatherInfoParam } from '../Utils/weatherType';
 import { DAILY_FORCAST_END_POINT, MID_TERM_TEMP_END_POINT, TODAY_FORCAST_END_POINT } from './weatherEndPoint';
 import { getCurrentDate, getOneWeek, getOneWeekAgo, getTmorrowFullDate, getTodayFullDate } from '../Utils/common';
 import { twentyFourHourData } from '../Utils/weatherType';
@@ -25,7 +25,7 @@ const { numOfRows, pageNo, regId, tmFc} = shortLiveWeatherParam;
   return data;
 };
 
-export const defaultParam:shortLiveWeatherParam = {
+export const shortLiveWeatherdefaultParam:shortLiveWeatherParam = {
   numOfRows: "1000",
   pageNo: "1",
   regId: "11B10101",

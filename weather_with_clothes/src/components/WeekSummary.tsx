@@ -16,17 +16,26 @@ export default function WeekSummary() {
   if(error) return <div>Error</div>
 
   return (
-    <div className='mt-4 p-2 rounded-2xl border-2'>
+    <div className='mt-4 p-2 rounded-2xl border-2 flex'>
       {weekData && (
         <>
-        {
-          <p>{weekData.regId}</p>}
-          <div>
+          <div className='block'>
             {
-              Object.values(weekData).slice(1).map((ele:any, index:any)=> {
+              Object.values(weekData.maxTempData).slice(1).map((ele:any, index:any)=> {
                 return (
                   <>
-                    <span className='mr-2'>{ele}</span>
+                    <p className='mr-2'>{ele}</p>
+                  </>
+                )
+              })  
+            }
+          </div>
+          <div className='block'>
+          {
+              Object.values(weekData.lowTempData).slice(1).map((ele:any, index:any)=> {
+                return (
+                  <>
+                    <p className='mr-2'>{ele}</p>
                   </>
                 )
               })  
@@ -48,5 +57,20 @@ function filterData(data) {
       }
   }
 
-  return filteredData;
+  const lowTempData = {};
+  const maxTempData = {};
+  const regId = {};
+
+  for (const key in filteredData) {
+
+    if(key.includes("Max")) {
+      maxTempData[key] = filteredData[key];
+    } else if (key.includes("Min")) {
+      lowTempData[key] = filteredData[key];
+    } else {
+      regId[key] = filteredData[key];
+    }
+  }
+
+  return { lowTempData, maxTempData, regId };
 }

@@ -7,9 +7,11 @@ export default function WeekSummary() {
   const [weekData, setWeekData] = useState<any>(null); // null로 초기화
   
   useEffect(() => {
-    setWeekData(filterData(data.response.body.items.item[0]));
-    console.log(weekData)
-  }, [data, status]); // useEffect will trigger when data or status changes
+    if (status === 'success') {
+      const responseData = filterData(data);
+      setWeekData(responseData);
+    }
+  }, [data, status]);
 
   if(isPending) return <div>Loading...</div>
 
@@ -24,7 +26,7 @@ export default function WeekSummary() {
               Object.values(weekData.maxTempData).slice(1).map((ele:any, index:any)=> {
                 return (
                   <>
-                    <p className='mr-2'>{ele}</p>
+                    <p key={index} className='mr-2'>{ele}</p>
                   </>
                 )
               })  
@@ -35,7 +37,7 @@ export default function WeekSummary() {
               Object.values(weekData.lowTempData).slice(1).map((ele:any, index:any)=> {
                 return (
                   <>
-                    <p className='mr-2'>{ele}</p>
+                    <p key={index} className='mr-2'>{ele}</p>
                   </>
                 )
               })  
@@ -49,8 +51,9 @@ export default function WeekSummary() {
 
 // 데이터 필터링 함수 정의
 function filterData(data) {
+  const response = data!.response.body.items.item[0]
   let filteredData = {};
-  for (const key in data) {
+  for (const key in response) {
       // "High" 또는 "Low"를 포함하지 않는 키만 새로운 객체에 할당
       if (!key.includes("High") && !key.includes("Low")) {
           filteredData[key] = data[key];

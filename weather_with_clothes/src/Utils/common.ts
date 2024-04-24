@@ -1,3 +1,4 @@
+import { FULL_THREEDAYSLATER, FULL_TODAY, FULL_TOMORROW } from "../API/weather";
 import { twentyFourHourData } from "./weatherType";
 
 const dateObj = new Date();
@@ -29,6 +30,18 @@ export function getTodayFullDate() {
 export function getTmorrowFullDate() {
 
   const dateObj = new Date(new Date().getTime() + 24 * 60 * 60 * 1000); // 하루의 밀리초 24시간 60분 60초 1000밀리초, 이걸 getTime에 더하면 정확히 하루 뒤 return
+  const year = dateObj.getFullYear();
+  const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+  const date  = (dateObj.getDate()).toString().padStart(2, '0');
+
+  return `${year}${month}${date}`;
+}
+
+/// 이 두개는 합쳐야 한다 리팩토링 필요
+
+export function getThreeDaysLaterFullDate() {
+
+  const dateObj = new Date(new Date().getTime() + 48 * 60 * 60 * 1000); // 하루의 밀리초 24시간 60분 60초 1000밀리초, 이걸 getTime에 더하면 정확히 하루 뒤 return
   const year = dateObj.getFullYear();
   const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
   const date  = (dateObj.getDate()).toString().padStart(2, '0');
@@ -71,6 +84,9 @@ export function getTwentyHours(data:twentyFourHourData[]) {
       tomorrowData.push(ele);
     }
   })
+
+  console.log(data);
+  console.log("-----");
   
   
   const todayConvertData:any = convertDataToTimeObject(todayData);
@@ -78,8 +94,55 @@ export function getTwentyHours(data:twentyFourHourData[]) {
   const arrayLength:number = Object.keys(todayConvertData).length + Object.keys(tomorrowConvertData).length;
 
   resultData = {todayConvertData, tomorrowConvertData, arrayLength}
+
+  console.log(resultData);
   
   return resultData;
+
+}
+
+export function threeDaysWeatherInfo(data){
+
+  let todayInfo = {};
+  let tomorrowInfo = {};
+  let threeDaysLaterInfo = {};
+  const todayMinTempArr:any = [];
+  console.log(data)
+
+  data.map((ele)=> {
+    if(ele.fcstDate === FULL_TODAY && ele.category === "TMP") {
+      todayMinTempArr.push(ele.fcstValue)
+    }
+
+    todayInfo["MIN"] = todayMinTempArr.sort((a, b) => a - b)[0];
+
+    if(ele.fcstDate === FULL_TODAY && ele.category === "TMX") {
+      todayInfo["MAX"] = ele.fcstValue;
+    }
+
+    if(ele.fcstDate === FULL_TOMORROW && ele.category === "TMN" ) {
+      tomorrowInfo["MIN"] = ele.fcstValue;
+    }
+    if(ele.fcstDate === FULL_TOMORROW && ele.category === "TMX") {
+      tomorrowInfo["MAX"] = ele.fcstValue;
+    }
+
+    if(ele.fcstDate === FULL_THREEDAYSLATER && ele.category === "TMN" ) {
+      threeDaysLaterInfo["MIN"] = ele.fcstValue;
+    }
+    if(ele.fcstDate === FULL_THREEDAYSLATER && ele.category === "TMX") {
+      threeDaysLaterInfo["MAX"] = ele.fcstValue;
+    }
+
+    if(ele.fcstDate === FULL_TODAY && ele.category === "TMN"){
+      console.log('없음?')
+    }
+  })
+
+
+  console.log(todayInfo, tomorrowInfo, threeDaysLaterInfo)
+
+  return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
 
 }
 
@@ -146,4 +209,34 @@ function convertTimeToTwentyFourHour(time:string){
     return `오후 ${hour % 12}`;
   }
 
+}
+
+
+// 데이터 필터링 함수 정의
+export function filterData(data:any) {
+  const response = data;
+  let filteredData = {};
+  for (const key in response) {
+      // "High" 또는 "Low"를 포함하지 않는 키만 새로운 객체에 할당
+      if (!key.includes("High") && !key.includes("Low")) {
+          filteredData[key] = data[key];
+      }
+  }
+
+  const lowTempData = {};
+  const maxTempData = {};
+  const regId = {};
+
+  for (const key in filteredData) {
+
+    if(key.includes("Max")) {
+      maxTempData[key] = filteredData[key];
+    } else if (key.includes("Min")) {
+      lowTempData[key] = filteredData[key];
+    } else {
+      regId[key] = filteredData[key];
+    }
+  }
+
+  return { lowTempData, maxTempData, regId };
 }

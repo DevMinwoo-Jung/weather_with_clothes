@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { todayInfoDefaultParam, useTodayWeatherInfo } from '../API/weather';
-import { getTwentyHours } from '../Utils/common';
+import { getTwentyHours, threeDaysWeatherInfo } from '../Utils/common';
 import Hour from './Hour/Hour';
 
 export default function TwentyFourWeatherGraph() {
   const { isPending, status, data, error, isFetching } = useTodayWeatherInfo(todayInfoDefaultParam);
   const [twentyFourHourData, setTwentyFourHourData] = useState<any>(null); // null로 초기화
+  const [threeDaysWeatherData, setThreeDaysWeatherData] = useState<any>(null); // null로 초기화
   useEffect(() => {
     if (status === 'success') {
-      const example = getTwentyHours(data);
+      console.log(data)
+      const example = getTwentyHours(data.resultData);
+      threeDaysWeatherInfo(data.fullData);
       setTwentyFourHourData(example);
     }
   }, [data, status]); // useEffect will trigger when data or status changes

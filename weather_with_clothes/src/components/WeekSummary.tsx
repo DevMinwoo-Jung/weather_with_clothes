@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useShortLiveWeather, shortLiveWeatherdefaultParam } from '../API/weather';
 import { filterData, getTwentyHours } from '../Utils/common';
+import WeekInfoImg from './WeekInfo/WeekInfoImg';
 
 export default function WeekSummary() {
   const { isPending, status, data, error, isFetching } = useShortLiveWeather(shortLiveWeatherdefaultParam);
@@ -19,6 +20,7 @@ export default function WeekSummary() {
 
   return (
     <div className='mt-4 p-2 rounded-2xl border-2 flex'>
+      <WeekInfoImg/>
       {weekData && (
         <>
           <div className='block' key={Math.random()}>

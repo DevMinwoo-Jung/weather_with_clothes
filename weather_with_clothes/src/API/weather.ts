@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { dailyWeatherInfoParam, shortLiveWeatherParam, todayWeatherInfoParam } from '../Utils/weatherType';
-import { DAILY_FORCAST_END_POINT, MID_TERM_TEMP_END_POINT, TODAY_FORCAST_END_POINT } from './weatherEndPoint';
+import { DAILY_FORCAST_END_POINT, MID_TERM_TEMP_END_POINT, TODAY_FORCAST_END_POINT, WEEK_LAND_FORCAST_END_POINT } from './weatherEndPoint';
 import { getCurrentDate, getOneWeek, getOneWeekAgo, getThreeDaysLaterFullDate, getTmorrowFullDate, getTodayFullDate } from '../Utils/common';
 import { twentyFourHourData } from '../Utils/weatherType';
 
@@ -146,3 +146,41 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
         queryFn: () => fetchTodayWeatherInfo(todayInfoDefaultParam)
       });
     }
+
+
+    export const fetchWeekWeatherInfo = async (shortLiveWeatherParam:shortLiveWeatherParam) => {
+
+      const { numOfRows, pageNo, regId, tmFc} = shortLiveWeatherParam;
+      
+        const res = await fetch(
+          `${WEEK_LAND_FORCAST_END_POINT}serviceKey=${SERVICE_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&regId=${regId}&tmFc=${tmFc}&dataType=JSON
+          `);
+          
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        
+        const data = await res.json();
+      
+        console.log(data.response.body.items.item[0]);
+      
+        return data.response.body.items.item[0];
+      };
+      
+      export const fetchWeekWeatherInfoParam:shortLiveWeatherParam = {
+        numOfRows: "1000",
+        pageNo: "1",
+        regId: "11B00000",
+        tmFc: getCurrentDate(),
+        dataType: "JSON"
+      }
+      
+      
+      
+      export function useWeekWeatherInfo(defaultParam:shortLiveWeatherParam){
+        return useQuery ({
+          queryKey: ['post', defaultParam],
+          queryFn: () => fetchWeekWeatherInfo(defaultParam)
+        });
+      }
+      

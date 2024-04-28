@@ -134,9 +134,6 @@ export function threeDaysWeatherInfo(data){
       threeDaysLaterInfo["MAX"] = ele.fcstValue;
     }
 
-    if(ele.fcstDate === FULL_TODAY && ele.category === "TMN"){
-      console.log('없음?')
-    }
   })
 
 

@@ -84,18 +84,12 @@ export function getTwentyHours(data:twentyFourHourData[]) {
       tomorrowData.push(ele);
     }
   })
-
-  console.log(data);
-  console.log("-----");
-  
   
   const todayConvertData:any = convertDataToTimeObject(todayData);
   const tomorrowConvertData:any =  convertDataToTimeObject(tomorrowData);
   const arrayLength:number = Object.keys(todayConvertData).length + Object.keys(tomorrowConvertData).length;
 
   resultData = {todayConvertData, tomorrowConvertData, arrayLength}
-
-  console.log(resultData);
   
   return resultData;
 
@@ -107,14 +101,22 @@ export function threeDaysWeatherInfo(data){
   let tomorrowInfo = {};
   let threeDaysLaterInfo = {};
   const todayMinTempArr:any = [];
-  console.log(data)
 
   data.map((ele)=> {
     if(ele.fcstDate === FULL_TODAY && ele.category === "TMP") {
       todayMinTempArr.push(ele.fcstValue)
     }
-
     todayInfo["MIN"] = todayMinTempArr.sort((a, b) => a - b)[0];
+
+    if(ele.fcstDate === FULL_TODAY && ele.category === "PTY") {
+      todayInfo["PTY"].push(ele.fcstValue)
+    }
+
+    if(ele.fcstDate === FULL_TODAY && ele.category === "SKY") {
+      console.log(ele.fcstValue)
+      todayInfo["SKY"].push(ele.fcstValue)
+    }
+
 
     if(ele.fcstDate === FULL_TODAY && ele.category === "TMX") {
       todayInfo["MAX"] = ele.fcstValue;
@@ -123,10 +125,19 @@ export function threeDaysWeatherInfo(data){
     if(ele.fcstDate === FULL_TOMORROW && ele.category === "TMN" ) {
       tomorrowInfo["MIN"] = ele.fcstValue;
     }
+
+    
     if(ele.fcstDate === FULL_TOMORROW && ele.category === "TMX") {
       tomorrowInfo["MAX"] = ele.fcstValue;
     }
+    
+    if(ele.fcstDate === FULL_TODAY && ele.category === "PTY") {
+      tomorrowInfo["PTY"].push(ele.fcstValue)
+    }
 
+    if(ele.fcstDate === FULL_TODAY && ele.category === "SKY") {
+      tomorrowInfo["SKY"].push(ele.fcstValue)
+    }
     if(ele.fcstDate === FULL_THREEDAYSLATER && ele.category === "TMN" ) {
       threeDaysLaterInfo["MIN"] = ele.fcstValue;
     }
@@ -134,10 +145,14 @@ export function threeDaysWeatherInfo(data){
       threeDaysLaterInfo["MAX"] = ele.fcstValue;
     }
 
+    if(ele.fcstDate === FULL_TODAY && ele.category === "PTY") {
+      threeDaysLaterInfo["PTY"].push(ele.fcstValue)
+    }
+
+    if(ele.fcstDate === FULL_TODAY && ele.category === "SKY") {
+      threeDaysLaterInfo["SKY"].push(ele.fcstValue)
+    }
   })
-
-
-  console.log(todayInfo, tomorrowInfo, threeDaysLaterInfo)
 
   return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
 
@@ -236,4 +251,18 @@ export function filterData(data:any) {
   }
 
   return { lowTempData, maxTempData, regId };
+}
+
+
+const daysFull:string[] = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"];
+
+export function getDaysInfo(){
+  const WEEKLENGTH = 7;
+  const WEEK_ARRY:string[] = ["오늘"];
+  
+  for(let i = 0; i < WEEKLENGTH - 1; i++){
+    WEEK_ARRY.push(daysFull[new Date((new Date().getTime() + ((i) * 24) * 60 * 60 * 1000)).getDay()])
+  }
+
+  return WEEK_ARRY;
 }

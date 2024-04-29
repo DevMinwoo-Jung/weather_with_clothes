@@ -3,10 +3,14 @@ import { useShortLiveWeather, shortLiveWeatherdefaultParam } from '../API/weathe
 import { filterData, getTwentyHours } from '../Utils/common';
 import WeekInfoImg from './WeekInfo/WeekInfoImg';
 
-export default function WeekSummary() {
+export default function WeekSummary(props) {
   const { isPending, status, data, error, isFetching } = useShortLiveWeather(shortLiveWeatherdefaultParam);
   const [weekData, setWeekData] = useState<any>(null); // null로 초기화
   
+  const { threeDaysWeatherData } = props;
+
+  console.log(threeDaysWeatherData)
+
   useEffect(() => {
     if (status === 'success') {
       const responseData = filterData(data);

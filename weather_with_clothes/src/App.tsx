@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './index.css'
 import { dailyInfoDefaultParam, todayInfoDefaultParam, useDailyWeatherInfo, useShortLiveWeather, useTodayWeatherInfo } from './API/weather';
 import React from 'react';
@@ -9,11 +9,26 @@ import Main from './components/Main';
 import Summary from './components/Summary';
 import TwentyFourWeatherGraph from './components/TwentyFourWeatherGraph';
 import WeekSummary from './components/WeekSummary';
+import { getTwentyHours, threeDaysWeatherInfo } from './Utils/common';
 
 function App() {
-  // const { status, data, error, isFetching } = useShortLiveWeather(defaultParam);
-  // const { status:a, data:b, error:c, isFetching:d } = useDailyWeatherInfo(dailyInfoDefaultParam);
-  // const { status:aa, data:bb, error:cc, isFetching:dd } = useTodayWeatherInfo(todayInfoDefaultParam);
+
+  const { isPending, status, data, error, isFetching } = useTodayWeatherInfo(todayInfoDefaultParam);
+  const [twentyFourHourData, setTwentyFourHourData] = useState<any>(null); // null로 초기화
+  const [threeDaysWeatherData, setThreeDaysWeatherData] = useState<any>(null); // null로 초기화
+
+  useEffect(() => {
+    if (status === 'success') {
+      const example = getTwentyHours(data.resultData);
+      const ex2  = threeDaysWeatherInfo(data.fullData);
+      setTwentyFourHourData(example);
+      setThreeDaysWeatherData(ex2);
+    }
+  }, [data, status]); // useEffect will trigger when data or status changes
+
+  if(isPending) return <div>Loading...</div>
+
+  if(error) return <div>Error</div>
 
   const { userLocation } = useGeolocation();
 
@@ -22,9 +37,9 @@ function App() {
       <div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl'>
         <Header/> 
         <Main/>
-        <TwentyFourWeatherGraph/>
+        <TwentyFourWeatherGraph twentyFourHourData={twentyFourHourData}/>
         <Summary/>
-        <WeekSummary/>
+        <WeekSummary threeDaysWeatherData={threeDaysWeatherData}/>
       </div>
     </div>
   )

@@ -102,58 +102,50 @@ export function threeDaysWeatherInfo(data){
   let threeDaysLaterInfo = {};
   const todayMinTempArr:any = [];
 
-  data.map((ele)=> {
-    if(ele.fcstDate === FULL_TODAY && ele.category === "TMP") {
-      todayMinTempArr.push(ele.fcstValue)
+  data.forEach(ele => {
+    if (ele.fcstDate === FULL_TODAY) {
+        switch (ele.category) {
+            case "TMP":
+                todayMinTempArr.push(ele.fcstValue);
+                todayInfo["MIN"] = todayMinTempArr.sort((a, b) => a - b)[0];
+                break;
+            case "PTY":
+                todayInfo["PTY"] = ele.fcstValue;
+                tomorrowInfo["PTY"] = ele.fcstValue;
+                threeDaysLaterInfo["PTY"] = ele.fcstValue;
+                break;
+            case "SKY":
+                todayInfo["SKY"] = ele.fcstValue;
+                tomorrowInfo["SKY"] = ele.fcstValue;
+                threeDaysLaterInfo["SKY"] = ele.fcstValue;
+                break;
+            case "TMX":
+                todayInfo["MAX"] = ele.fcstValue;
+                tomorrowInfo["MAX"] = ele.fcstValue;
+                threeDaysLaterInfo["MAX"] = ele.fcstValue;
+                break;
+        }
+    } else if (ele.fcstDate === FULL_TOMORROW) {
+        switch (ele.category) {
+            case "TMN":
+                tomorrowInfo["MIN"] = ele.fcstValue;
+                break;
+            case "TMX":
+                tomorrowInfo["MAX"] = ele.fcstValue;
+                break;
+        }
+    } else if (ele.fcstDate === FULL_THREEDAYSLATER) {
+        switch (ele.category) {
+            case "TMN":
+                threeDaysLaterInfo["MIN"] = ele.fcstValue;
+                break;
+            case "TMX":
+                threeDaysLaterInfo["MAX"] = ele.fcstValue;
+                break;
+        }
     }
-    todayInfo["MIN"] = todayMinTempArr.sort((a, b) => a - b)[0];
-
-    if(ele.fcstDate === FULL_TODAY && ele.category === "PTY") {
-      todayInfo["PTY"] = ele.fcstValue;
-    }
-
-    if(ele.fcstDate === FULL_TODAY && ele.category === "SKY") {
-      // 20240428 이거 고쳐야함
-      todayInfo["SKY"] = ele.fcstValue;
-    }
-
-
-    if(ele.fcstDate === FULL_TODAY && ele.category === "TMX") {
-      todayInfo["MAX"] = ele.fcstValue;
-    }
-
-    if(ele.fcstDate === FULL_TOMORROW && ele.category === "TMN" ) {
-      tomorrowInfo["MIN"] = ele.fcstValue;
-    }
-
-    
-    if(ele.fcstDate === FULL_TOMORROW && ele.category === "TMX") {
-      tomorrowInfo["MAX"] = ele.fcstValue;
-    }
-    
-    if(ele.fcstDate === FULL_TODAY && ele.category === "PTY") {
-      tomorrowInfo["PTY"] = ele.fcstValue;
-    }
-
-    if(ele.fcstDate === FULL_TODAY && ele.category === "SKY") {
-      tomorrowInfo["SKY"] = ele.fcstValue;
-    }
-    if(ele.fcstDate === FULL_THREEDAYSLATER && ele.category === "TMN" ) {
-      threeDaysLaterInfo["MIN"] = ele.fcstValue;
-    }
-    if(ele.fcstDate === FULL_THREEDAYSLATER && ele.category === "TMX") {
-      threeDaysLaterInfo["MAX"] = ele.fcstValue;
-    }
-
-    if(ele.fcstDate === FULL_TODAY && ele.category === "PTY") {
-      threeDaysLaterInfo["PTY"] = ele.fcstValue;
-    }
-
-    if(ele.fcstDate === FULL_TODAY && ele.category === "SKY") {
-      threeDaysLaterInfo["SKY"] =ele.fcstValue;
-    }
-  })
-
+});
+  console.log(todayInfo, tomorrowInfo, threeDaysLaterInfo);
   return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
 
 }

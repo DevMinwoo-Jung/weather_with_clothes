@@ -12,7 +12,6 @@ export default function WeekInfoImg() {
   useEffect(() => {
     if (status === 'success') {
       const responseData = (data);
-      console.log(data)
       setWeekData(responseData);
       setWeekDays(getDaysInfo())
     }

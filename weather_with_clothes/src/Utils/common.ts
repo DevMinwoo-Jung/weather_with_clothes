@@ -109,12 +109,12 @@ export function threeDaysWeatherInfo(data){
     todayInfo["MIN"] = todayMinTempArr.sort((a, b) => a - b)[0];
 
     if(ele.fcstDate === FULL_TODAY && ele.category === "PTY") {
-      todayInfo["PTY"].push(ele.fcstValue)
+      todayInfo["PTY"] = ele.fcstValue;
     }
 
     if(ele.fcstDate === FULL_TODAY && ele.category === "SKY") {
-      console.log(ele.fcstValue)
-      todayInfo["SKY"].push(ele.fcstValue)
+      // 20240428 이거 고쳐야함
+      todayInfo["SKY"] = ele.fcstValue;
     }
 
 
@@ -132,11 +132,11 @@ export function threeDaysWeatherInfo(data){
     }
     
     if(ele.fcstDate === FULL_TODAY && ele.category === "PTY") {
-      tomorrowInfo["PTY"].push(ele.fcstValue)
+      tomorrowInfo["PTY"] = ele.fcstValue;
     }
 
     if(ele.fcstDate === FULL_TODAY && ele.category === "SKY") {
-      tomorrowInfo["SKY"].push(ele.fcstValue)
+      tomorrowInfo["SKY"] = ele.fcstValue;
     }
     if(ele.fcstDate === FULL_THREEDAYSLATER && ele.category === "TMN" ) {
       threeDaysLaterInfo["MIN"] = ele.fcstValue;
@@ -146,11 +146,11 @@ export function threeDaysWeatherInfo(data){
     }
 
     if(ele.fcstDate === FULL_TODAY && ele.category === "PTY") {
-      threeDaysLaterInfo["PTY"].push(ele.fcstValue)
+      threeDaysLaterInfo["PTY"] = ele.fcstValue;
     }
 
     if(ele.fcstDate === FULL_TODAY && ele.category === "SKY") {
-      threeDaysLaterInfo["SKY"].push(ele.fcstValue)
+      threeDaysLaterInfo["SKY"] =ele.fcstValue;
     }
   })
 

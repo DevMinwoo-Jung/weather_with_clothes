@@ -9,7 +9,6 @@ export default function TwentyFourWeatherGraph() {
   const [threeDaysWeatherData, setThreeDaysWeatherData] = useState<any>(null); // null로 초기화
   useEffect(() => {
     if (status === 'success') {
-      console.log(data)
       const example = getTwentyHours(data.resultData);
       threeDaysWeatherInfo(data.fullData);
       setTwentyFourHourData(example);

@@ -13,7 +13,7 @@ export function getCurrentDate() {
   const _year = year;
   const _month = month
   const _date  = date
-  const hours = dateObj.getHours() > 12 ? '0600' : '1800';
+  const hours = Number(dateObj.getHours()) <= 12 ? '0600' : '1800';
 
   return `${_year}${_month}${_date}${hours}`;
 }
@@ -270,7 +270,6 @@ export function filterLandData(data:any) {
           filteredData[key] = data[key];
       }
   }
-  console.log(filteredData)
 //   const lowTempData = {};
 //   const maxTempData = {};
 //   const regId = {};

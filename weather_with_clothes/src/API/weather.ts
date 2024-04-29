@@ -23,8 +23,6 @@ const { numOfRows, pageNo, regId, tmFc} = shortLiveWeatherParam;
   
   const data = await res.json();
 
-  console.log(data.response.body.items.item[0]);
-
   return data.response.body.items.item[0];
 };
 
@@ -161,8 +159,6 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
         }
         
         const data = await res.json();
-      
-        console.log(data.response.body.items.item[0]);
       
         return data.response.body.items.item[0];
       };

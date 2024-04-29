@@ -13,7 +13,6 @@ export default function WeekSummary(props) {
   useEffect(() => {
     if (status === 'success') {
       const responseData = filterData(data);
-      console.log(data)
       setWeekData(responseData);
     }
   }, [data, status]);

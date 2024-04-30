@@ -9,7 +9,6 @@ export default function WeekSummary(props) {
   
   const { threeDaysWeatherData } = props;
 
-  console.log(threeDaysWeatherData)
 
   useEffect(() => {
     if (status === 'success') {
@@ -25,6 +24,49 @@ export default function WeekSummary(props) {
   return (
     <div className='mt-4 p-2 rounded-2xl border-2 flex'>
       <WeekInfoImg/>
+      {
+        threeDaysWeatherData && (
+          <>
+            <div className='block' key={Math.random()}>
+            {
+              Object.values(threeDaysWeatherData.todayInfo).map((ele:any)=> {
+                console.log(ele)
+                return (
+                  <>
+                    <p>{ele["MAX"]}</p>
+                    <p>{ele["MIN"]}</p>
+                  </>
+                )
+              })
+            }
+          </div>
+          <div className='block' key={Math.random()}>
+            {
+              Object.values(threeDaysWeatherData.tomorrowInfo).map((ele:any)=> {
+                return (
+                  <>
+                    <p>{ele.MAX}</p>
+                    <p>{ele.MIN}</p>
+                  </>
+                )
+              })
+            }
+          </div>
+          <div className='block' key={Math.random()}>
+            {
+              Object.values(threeDaysWeatherData.threeDaysLaterInfo).map((ele:any)=> {
+                return (
+                  <>
+                    <p>{ele.MAX}</p>
+                    <p>{ele.MIN}</p>
+                  </>
+                )
+              })
+            }
+          </div>
+          </>
+        )
+      }
       {weekData && (
         <>
           <div className='block' key={Math.random()}>
@@ -34,7 +76,7 @@ export default function WeekSummary(props) {
                   <>
                     <p key={Math.random()} className='mr-2'>{ele}</p>
                   </>
-                )
+                ) 
               })  
             }
           </div>

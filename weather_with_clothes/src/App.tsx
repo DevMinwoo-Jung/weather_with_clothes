@@ -30,7 +30,7 @@ function App() {
 
   if(error) return <div>Error</div>
 
-  const { userLocation } = useGeolocation();
+  // const { userLocation } = useGeolocation();
 
   return (
     <div className='min-w-screen min-h-screen bg-slate-500 text-white font-bold'>

@@ -145,7 +145,7 @@ export function threeDaysWeatherInfo(data){
         }
     }
 });
-  console.log(todayInfo, tomorrowInfo, threeDaysLaterInfo);
+
   return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
 
 }

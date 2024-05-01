@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useShortLiveWeather, shortLiveWeatherdefaultParam } from '../API/weather';
 import { filterData, getTwentyHours } from '../Utils/common';
-import WeekInfoImg from './WeekInfo/WeekInfoImg';
+import WeekInfoDays from './WeekInfo/WeekInfoDays';
+import WeekInfoText from './WeekInfo/WeekInfoText';
 
 export default function WeekSummary(props) {
   const { isPending, status, data, error, isFetching } = useShortLiveWeather(shortLiveWeatherdefaultParam);
@@ -9,10 +10,10 @@ export default function WeekSummary(props) {
   
   const { threeDaysWeatherData } = props;
 
-
   useEffect(() => {
     if (status === 'success') {
       const responseData = filterData(data);
+      console.log(data)
       setWeekData(responseData);
     }
   }, [data, status]);
@@ -20,79 +21,44 @@ export default function WeekSummary(props) {
   if(isPending) return <div>Loading...</div>
 
   if(error) return <div>Error</div>
-
   return (
     <div className='mt-4 p-2 rounded-2xl border-2 flex'>
-      <WeekInfoImg/>
+      <WeekInfoDays/>
       {
         threeDaysWeatherData && (
-          <>
-            <div className='block' key={Math.random()}>
-            {
-              Object.values(threeDaysWeatherData.todayInfo).map((ele:any)=> {
-                console.log(ele)
-                return (
-                  <>
-                    <p>{ele["MAX"]}</p>
-                    <p>{ele["MIN"]}</p>
-                  </>
-                )
-              })
-            }
+          <div className='block'>
+            <WeekInfoText props={threeDaysWeatherData.todayInfo}/>
+            <WeekInfoText props={threeDaysWeatherData.tomorrowInfo}/>
+            <WeekInfoText props={threeDaysWeatherData.threeDaysLaterInfo}/>
+            {weekData && (
+            <div className='flex'>
+              <div className='block' key={Math.random()}>
+                {
+                  Object.values(weekData.maxTempData).slice(0, 4).map((ele:any, index:any)=> {
+                    return (
+                      <>
+                        <p key={Math.random()} className='mr-2'>{ele}</p>
+                      </>
+                    ) 
+                  })  
+                }
+              </div>
+              <div className='block' key={Math.random()}>
+              {
+                  Object.values(weekData.lowTempData).slice(0, 4).map((ele:any, index:any)=> {
+                    return (
+                      <>
+                        <p key={Math.random()} className='mr-2'>{ele}</p>
+                      </>
+                    )
+                  })  
+                }
+              </div>
+            </div>
+          )}          
           </div>
-          <div className='block' key={Math.random()}>
-            {
-              Object.values(threeDaysWeatherData.tomorrowInfo).map((ele:any)=> {
-                return (
-                  <>
-                    <p>{ele.MAX}</p>
-                    <p>{ele.MIN}</p>
-                  </>
-                )
-              })
-            }
-          </div>
-          <div className='block' key={Math.random()}>
-            {
-              Object.values(threeDaysWeatherData.threeDaysLaterInfo).map((ele:any)=> {
-                return (
-                  <>
-                    <p>{ele.MAX}</p>
-                    <p>{ele.MIN}</p>
-                  </>
-                )
-              })
-            }
-          </div>
-          </>
         )
       }
-      {weekData && (
-        <>
-          <div className='block' key={Math.random()}>
-            {
-              Object.values(weekData.maxTempData).slice(1).map((ele:any, index:any)=> {
-                return (
-                  <>
-                    <p key={Math.random()} className='mr-2'>{ele}</p>
-                  </>
-                ) 
-              })  
-            }
-          </div>
-          <div className='block' key={Math.random()}>
-          {
-              Object.values(weekData.lowTempData).slice(1).map((ele:any, index:any)=> {
-                return (
-                  <>
-                    <p key={Math.random()} className='mr-2'>{ele}</p>
-                  </>
-                )
-              })  
-            }
-          </div>
-        </>
-      )}
     </div>
   )
 }

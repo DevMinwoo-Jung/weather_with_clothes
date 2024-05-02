@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { filterData, getDaysInfo } from '../../Utils/common';
+import { filterData, filterLandData, getDaysInfo } from '../../Utils/common';
 import { useState } from 'react';
 import { useWeekWeatherInfo, fetchWeekWeatherInfoParam } from '../../API/weather';
 
@@ -13,6 +13,8 @@ export default function WeekInfoImg() {
     if (status === 'success') {
       const responseData = (data);
       setWeekData(responseData);
+      console.log(weekData)
+      console.log(filterLandData(weekData))
       setWeekDays(getDaysInfo())
     }
   }, [data, status]);

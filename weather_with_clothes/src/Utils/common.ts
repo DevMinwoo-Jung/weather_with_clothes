@@ -258,3 +258,33 @@ export function getDaysInfo(){
 
   return WEEK_ARRY;
 }
+
+
+// ladn 데이터 필터링 함수 정의
+export function filterLandData(data:any) {
+  const response = data;
+  let filteredData = {};
+  for (const key in response) {
+      // "High" 또는 "Low"를 포함하지 않는 키만 새로운 객체에 할당
+      if (!key.includes("8") && !key.includes("9") && !key.includes("10")) {
+          filteredData[key] = data[key];
+      }
+  }
+  console.log(filteredData)
+//   const lowTempData = {};
+//   const maxTempData = {};
+//   const regId = {};
+
+//   for (const key in filteredData) {
+
+//     if(key.includes("Max")) {
+//       maxTempData[key] = filteredData[key];
+//     } else if (key.includes("Min")) {
+//       lowTempData[key] = filteredData[key];
+//     } else {
+//       regId[key] = filteredData[key];
+//     }
+//   }
+
+//   return { lowTempData, maxTempData, regId };
+}

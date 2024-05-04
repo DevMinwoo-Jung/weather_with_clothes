@@ -270,6 +270,8 @@ export function filterLandData(data:any) {
           filteredData[key] = data[key];
       }
   }
+
+  return filteredData;
 //   const lowTempData = {};
 //   const maxTempData = {};
 //   const regId = {};

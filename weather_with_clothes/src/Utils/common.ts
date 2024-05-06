@@ -13,8 +13,8 @@ export function getCurrentDate() {
   const _year = year;
   const _month = month
   const _date  = date
-  const hours = Number(dateObj.getHours()) <= 12 ? '0600' : '1800';
-
+  const hours = Number(dateObj.getHours()) <= 18 ? '0600' : '1800';
+  console.log(dateObj.getHours());
   return `${_year}${_month}${_date}${hours}`;
 }
 

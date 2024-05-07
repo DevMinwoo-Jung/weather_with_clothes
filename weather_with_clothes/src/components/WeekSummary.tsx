@@ -61,7 +61,9 @@ export default function WeekSummary(props) {
 
 function renderSeparatedObjects(obj) {
 	const rnStPairs: any = [];
+	const rainParis: any = [];
 	const wfPairs: any = [];
+	const weatherPairs: any = [];
 
 	// 주어진 객체를 순회하면서 rnSt와 wf로 시작하는 키를 분리
 	for (const key in obj) {
@@ -72,6 +74,14 @@ function renderSeparatedObjects(obj) {
 		}
 	}
 
+	for (let i = 0; i < rnStPairs.length; i = i + 2) {
+		rainParis.push((rnStPairs[i] + rnStPairs[i + 1]) / 2);
+	}
+
+	for (let i = 0; i < rnStPairs.length; i = i + 2) {
+		weatherPairs[i] = `${wfPairs[i]} ${wfPairs[i + 1]}`;
+	}
+
 	// // rnSt 객체 렌더링
 	// const rnStHTML = rnStPairs.map(pair => `<p>${pair[0]}: ${pair[1]}</p>`).join('');
 	// const rnStRenderedHTML = `<div>${rnStHTML}</div>`;
@@ -80,5 +90,5 @@ function renderSeparatedObjects(obj) {
 	// const wfHTML = wfPairs.map(pair => `<p>${pair[0]}: ${pair[1]}</p>`).join('');
 	// const wfRenderedHTML = `<div>${wfHTML}</div>`;
 
-	return { rnStPairs, wfPairs };
+	return { rainParis, weatherPairs };
 }

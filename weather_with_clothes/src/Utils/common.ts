@@ -115,7 +115,17 @@ export function threeDaysWeatherInfo(data){
                 threeDaysLaterInfo["PTY"] = ele.fcstValue;
                 break;
             case "SKY":
-                todayInfo["SKY"] = ele.fcstValue;
+                // todayInfo["SKY"] = ele.fcstValue;
+                // tomorrowInfo["SKY"] = ele.fcstValue;
+                // threeDaysLaterInfo["SKY"] = ele.fcstValue;
+
+                // if(todayInfo["SKY"] !== null) {
+                //   todayInfo["SKY"] = [...todayInfo["SKY"], ele.fcstValue];
+                // } else {
+                //   todayInfo["SKY"] = [ele.fcstValue];
+                // }
+                todayInfo["SKY"] = Array.isArray(todayInfo["SKY"]) ? [...todayInfo["SKY"], ele.fcstValue] : [ele.fcstValue];
+
                 tomorrowInfo["SKY"] = ele.fcstValue;
                 threeDaysLaterInfo["SKY"] = ele.fcstValue;
                 break;
@@ -145,7 +155,7 @@ export function threeDaysWeatherInfo(data){
         }
     }
 });
-
+  console.log(todayInfo["SKY"])
   return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
 
 }

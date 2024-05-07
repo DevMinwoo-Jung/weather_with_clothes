@@ -1,27 +1,35 @@
 import React from 'react';
 
 export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
-	console.log(weekData, weekInformationData);
-	console.log(weekInformationData);
-
-	// for (let i = 0; i < Object.keys(weekInformationData).length; i + 2) {
-
-	// }
-
 	return (
 		<>
 			{weekData && weekInformationData && (
 				<div className='flex'>
 					<div>
-						{weekInformationData.rnStPairs.map((ele: any, index: number) => {
-							return (
-								<>
-									<p key={Math.random()} className='mr-2'>
-										{ele}
-									</p>
-								</>
-							);
-						})}
+						{weekInformationData.rainParis
+							.slice(0, 4)
+							.map((ele: any, index: number) => {
+								return (
+									<>
+										<p key={Math.random()} className='mr-2'>
+											{ele}
+										</p>
+									</>
+								);
+							})}
+					</div>
+					<div>
+						{Object.values(weekInformationData.weatherPairs)
+							.slice(0, 4)
+							.map((ele: any, index: number) => {
+								return (
+									<>
+										<p key={Math.random()} className='mr-2'>
+											{ele}
+										</p>
+									</>
+								);
+							})}
 					</div>
 					<div className='block' key={Math.random()}>
 						{Object.values(weekData.maxTempData)

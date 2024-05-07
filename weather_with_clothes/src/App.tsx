@@ -27,6 +27,7 @@ function App() {
 	useEffect(() => {
 		if (status === 'success') {
 			const example = getTwentyHours(data.resultData);
+			console.log(data.fullData);
 			const ex2 = threeDaysWeatherInfo(data.fullData);
 			setTwentyFourHourData(example);
 			setThreeDaysWeatherData(ex2);

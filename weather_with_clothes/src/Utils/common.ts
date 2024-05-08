@@ -95,69 +95,123 @@ export function getTwentyHours(data:twentyFourHourData[]) {
 
 }
 
-export function threeDaysWeatherInfo(data){
+// export function threeDaysWeatherInfo(data){
 
+//   let todayInfo = {};
+//   let tomorrowInfo = {};
+//   let threeDaysLaterInfo = {};
+//   const todayMinTempArr:any = [];
+
+//   data.forEach(ele => {
+//     if (ele.fcstDate === FULL_TODAY) {
+//         switch (ele.category) {
+//             case "TMP":
+//                 todayMinTempArr.push(ele.fcstValue);
+//                 todayInfo["MIN"] = todayMinTempArr.sort((a, b) => a - b)[0];
+//                 break;
+//             case "PTY":
+//                 todayInfo["PTY"] = ele.fcstValue;
+//                 break;
+//             case "SKY":
+//                 todayInfo["SKY"] = Array.isArray(todayInfo["SKY"]) ? [...todayInfo["SKY"], ele.fcstValue] : [ele.fcstValue];
+//                 break;
+//             case "TMX":
+//                 todayInfo["MAX"] = ele.fcstValue;
+//                 break;
+//             case "POP":
+//               todayInfo["POP"] = Array.isArray(todayInfo["POP"]) ? [...todayInfo["POP"], ele.fcstValue] : [ele.fcstValue];
+//               break;
+//         }
+//     } else if (ele.fcstDate === FULL_TOMORROW) {
+//         switch (ele.category) {
+//             case "TMN":
+//                 tomorrowInfo["MIN"] = ele.fcstValue;
+//                 break;
+//             case "TMX":
+//                 tomorrowInfo["MAX"] = ele.fcstValue;
+//                 break;
+//             case "POP":
+//                 tomorrowInfo["POP"] = Array.isArray(tomorrowInfo["POP"]) ? [...tomorrowInfo["POP"], ele.fcstValue] : [ele.fcstValue];
+//                 break;
+//             case "SKY":
+//               tomorrowInfo["SKY"] = Array.isArray(tomorrowInfo["SKY"]) ? [...tomorrowInfo["SKY"], ele.fcstValue] : [ele.fcstValue];
+//             break;
+//         }
+//     } else if (ele.fcstDate === FULL_THREEDAYSLATER) {
+//         switch (ele.category) {
+//             case "TMN":
+//                 threeDaysLaterInfo["MIN"] = ele.fcstValue;
+//                 break;
+//             case "TMX":
+//                 threeDaysLaterInfo["MAX"] = ele.fcstValue;
+//                 break;
+//             case "POP":
+//                 threeDaysLaterInfo["POP"] = Array.isArray(threeDaysLaterInfo["POP"]) ? [...threeDaysLaterInfo["POP"], ele.fcstValue] : [ele.fcstValue];
+//                 break;
+//             case "SKY":
+//                 threeDaysLaterInfo["SKY"] = Array.isArray(threeDaysLaterInfo["SKY"]) ? [...threeDaysLaterInfo["SKY"], ele.fcstValue] : [ele.fcstValue];
+//                 break;
+//         }
+//     }
+// });
+//   console.log(todayInfo["SKY"])
+//   return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
+
+// }
+
+export function threeDaysWeatherInfo(data) {
   let todayInfo = {};
   let tomorrowInfo = {};
   let threeDaysLaterInfo = {};
-  const todayMinTempArr:any = [];
+  const todayMinTempArr = [];
 
   data.forEach(ele => {
-    if (ele.fcstDate === FULL_TODAY) {
-        switch (ele.category) {
-            case "TMP":
-                todayMinTempArr.push(ele.fcstValue);
-                todayInfo["MIN"] = todayMinTempArr.sort((a, b) => a - b)[0];
-                break;
-            case "PTY":
-                todayInfo["PTY"] = ele.fcstValue;
-                tomorrowInfo["PTY"] = ele.fcstValue;
-                threeDaysLaterInfo["PTY"] = ele.fcstValue;
-                break;
-            case "SKY":
-                // todayInfo["SKY"] = ele.fcstValue;
-                // tomorrowInfo["SKY"] = ele.fcstValue;
-                // threeDaysLaterInfo["SKY"] = ele.fcstValue;
+      switch (ele.fcstDate) {
+          case FULL_TODAY:
+              handleWeatherInfo(todayInfo, ele.category, ele.fcstValue);
+              break;
+          case FULL_TOMORROW:
+              handleWeatherInfo(tomorrowInfo, ele.category, ele.fcstValue);
+              break;
+          case FULL_THREEDAYSLATER:
+              handleWeatherInfo(threeDaysLaterInfo, ele.category, ele.fcstValue);
+              break;
+      }
+  });
 
-                // if(todayInfo["SKY"] !== null) {
-                //   todayInfo["SKY"] = [...todayInfo["SKY"], ele.fcstValue];
-                // } else {
-                //   todayInfo["SKY"] = [ele.fcstValue];
-                // }
-                todayInfo["SKY"] = Array.isArray(todayInfo["SKY"]) ? [...todayInfo["SKY"], ele.fcstValue] : [ele.fcstValue];
+  console.log(todayInfo["SKY"]);
+  return { todayInfo, tomorrowInfo, threeDaysLaterInfo };
+}
 
-                tomorrowInfo["SKY"] = ele.fcstValue;
-                threeDaysLaterInfo["SKY"] = ele.fcstValue;
-                break;
-            case "TMX":
-                todayInfo["MAX"] = ele.fcstValue;
-                tomorrowInfo["MAX"] = ele.fcstValue;
-                threeDaysLaterInfo["MAX"] = ele.fcstValue;
-                break;
-        }
-    } else if (ele.fcstDate === FULL_TOMORROW) {
-        switch (ele.category) {
-            case "TMN":
-                tomorrowInfo["MIN"] = ele.fcstValue;
-                break;
-            case "TMX":
-                tomorrowInfo["MAX"] = ele.fcstValue;
-                break;
-        }
-    } else if (ele.fcstDate === FULL_THREEDAYSLATER) {
-        switch (ele.category) {
-            case "TMN":
-                threeDaysLaterInfo["MIN"] = ele.fcstValue;
-                break;
-            case "TMX":
-                threeDaysLaterInfo["MAX"] = ele.fcstValue;
-                break;
-        }
-    }
-});
-  console.log(todayInfo["SKY"])
-  return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
+function handleWeatherInfo(info, category, value) {
+  switch (category) {
+      case "TMP":
+          info["MIN"] = handleMinMax(info["MIN"], value);
+          break;
+      case "PTY":
+      case "SKY":
+      case "POP":
+          info[category] = handleArrayValue(info[category], value);
+          break;
+      case "TMN":
+      case "TMX":
+          info[category] = value;
+          break;
+  }
+}
 
+function handleMinMax(existingValue, newValue) {
+  if (existingValue === undefined || newValue < existingValue) {
+      return newValue;
+  }
+  return existingValue;
+}
+
+function handleArrayValue(existingArray, newValue) {
+  if (existingArray === undefined) {
+      return [newValue];
+  }
+  return [...existingArray, newValue];
 }
 
 export function getNowHours() {

@@ -56,7 +56,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 									</>
 								);
 							})}
-						{Object.values(weekData.maxTempData)
+						{Object.values(weekData.lowTempData)
 							.slice(0, 4)
 							.map((ele: any, index: any) => {
 								return (

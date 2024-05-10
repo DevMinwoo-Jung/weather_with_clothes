@@ -101,6 +101,18 @@ export function threeDaysWeatherInfo(data){
   let tomorrowInfo = {};
   let threeDaysLaterInfo = {};
   let popLengths = {};
+  let skyLengths = {
+    "today": {
+
+    },
+    "tomorrow": {
+
+    },
+    "threeDaysLater": {
+
+    },
+  };
+
   const todayMinTempArr:number[] = [];
 
   data.forEach(ele => {
@@ -111,10 +123,17 @@ export function threeDaysWeatherInfo(data){
                 todayInfo["MIN"] = todayMinTempArr.sort((a, b) => a - b)[0];
                 break;
             case "PTY":
-                todayInfo["PTY"] = ele.fcstValue;
+                // todayInfo["PTY"] = ele.fcstValue;
+                todayInfo["PTY"] = Array.isArray(todayInfo["PTY"]) ? [...todayInfo["PTY"], ele.fcstValue] : [ele.fcstValue];
                 break;
             case "SKY":
-                todayInfo["SKY"] = Array.isArray(todayInfo["SKY"]) ? [...todayInfo["SKY"], ele.fcstValue] : [ele.fcstValue];
+                  if (Number(ele.fcstTime.slice(0, 2)) < 12) {
+                    todayInfo["SKY"] = todayInfo["SKY"] || {};
+                    todayInfo["SKY"]["AM"] = Array.isArray(todayInfo["SKY"]["AM"]) ? [...todayInfo["SKY"]["AM"], ele.fcstValue] : [ele.fcstValue];
+                } else {
+                    todayInfo["SKY"] = todayInfo["SKY"] || {};
+                    todayInfo["SKY"]["PM"] = Array.isArray(todayInfo["SKY"]["PM"]) ? [...todayInfo["SKY"]["PM"], ele.fcstValue] : [ele.fcstValue];
+                }
                 break;
             case "TMX":
                 todayInfo["MAX"] = ele.fcstValue;
@@ -135,7 +154,13 @@ export function threeDaysWeatherInfo(data){
                     tomorrowInfo["POP"] = Array.isArray(tomorrowInfo["POP"]) ? [...tomorrowInfo["POP"], ele.fcstValue] : [ele.fcstValue];
                     break;
                     case "SKY":
-                      tomorrowInfo["SKY"] = Array.isArray(tomorrowInfo["SKY"]) ? [...tomorrowInfo["SKY"], ele.fcstValue] : [ele.fcstValue];
+                      if (Number(ele.fcstTime.slice(0, 2)) < 12) {
+                        tomorrowInfo["SKY"] = tomorrowInfo["SKY"] || {};
+                        tomorrowInfo["SKY"]["AM"] = Array.isArray(tomorrowInfo["SKY"]["AM"]) ? [...tomorrowInfo["SKY"]["AM"], ele.fcstValue] : [ele.fcstValue];
+                    } else {
+                        tomorrowInfo["SKY"] = tomorrowInfo["SKY"] || {};
+                        tomorrowInfo["SKY"]["PM"] = Array.isArray(tomorrowInfo["SKY"]["PM"]) ? [...tomorrowInfo["SKY"]["PM"], ele.fcstValue] : [ele.fcstValue];
+                    }
                       break;
                     }
                   } else if (ele.fcstDate === FULL_THREEDAYSLATER) {
@@ -150,7 +175,13 @@ export function threeDaysWeatherInfo(data){
                             threeDaysLaterInfo["POP"] = Array.isArray(threeDaysLaterInfo["POP"]) ? [...threeDaysLaterInfo["POP"], ele.fcstValue] : [ele.fcstValue];
                             break;
                             case "SKY":
-                              threeDaysLaterInfo["SKY"] = Array.isArray(threeDaysLaterInfo["SKY"]) ? [...threeDaysLaterInfo["SKY"], ele.fcstValue] : [ele.fcstValue];
+                              if (Number(ele.fcstTime.slice(0, 2)) < 12) {
+                                threeDaysLaterInfo["SKY"] = threeDaysLaterInfo["SKY"] || {};
+                                threeDaysLaterInfo["SKY"]["AM"] = Array.isArray(threeDaysLaterInfo["SKY"]["AM"]) ? [...threeDaysLaterInfo["SKY"]["AM"], ele.fcstValue] : [ele.fcstValue];
+                            } else {
+                                threeDaysLaterInfo["SKY"] = threeDaysLaterInfo["SKY"] || {};
+                                threeDaysLaterInfo["SKY"]["PM"] = Array.isArray(threeDaysLaterInfo["SKY"]["PM"]) ? [...threeDaysLaterInfo["SKY"]["PM"], ele.fcstValue] : [ele.fcstValue];
+                            }
                               break;
                             }
                           }
@@ -161,17 +192,37 @@ export function threeDaysWeatherInfo(data){
                         popLengths["today"] = todayInfo["POP"].length;
                         popLengths["tomorrow"] = tomorrowInfo["POP"].length;
                         popLengths["threeDaysLater"] = threeDaysLaterInfo["POP"].length;
+                        /////
+                        skyLengths["today"]["AM"] = todayInfo["SKY"]["AM"].length;
+                        skyLengths["today"]["PM"] = todayInfo["SKY"]["PM"].length;
 
-                        todayInfo["POP"] = getPOPResult(todayInfo, popLengths["today"]);
-                        tomorrowInfo["POP"] = getPOPResult(tomorrowInfo, popLengths["tomorrow"]);
-                        threeDaysLaterInfo["POP"] = getPOPResult(threeDaysLaterInfo, popLengths["threeDaysLater"]);
+                        skyLengths["tomorrow"]["AM"] = tomorrowInfo["SKY"]["AM"].length;
+                        skyLengths["tomorrow"]["PM"] = tomorrowInfo["SKY"]["PM"].length;
 
+                        skyLengths["threeDaysLater"]["AM"] = threeDaysLaterInfo["SKY"]["AM"].length;
+                        skyLengths["threeDaysLater"]["PM"] = threeDaysLaterInfo["SKY"]["PM"].length;
+                        ////////
+                        todayInfo["POP"] = getDataSumResult(todayInfo, popLengths["today"], "POP");
+                        tomorrowInfo["POP"] = getDataSumResult(tomorrowInfo, popLengths["tomorrow"], "POP");
+                        threeDaysLaterInfo["POP"] = getDataSumResult(threeDaysLaterInfo, popLengths["threeDaysLater"], "POP");
+
+                        /////
+                        // todayInfo["SKY"] = getDataSumResult(todayInfo, skyLengths["today"]["AM"], "SKY");
+                        // tomorrowInfo["SKY"] = getDataSumResult(tomorrowInfo, skyLengths["tomorrow"]["AM"], "SKY");
+                        // threeDaysLaterInfo["SKY"] = getDataSumResult(threeDaysLaterInfo, skyLengths["threeDaysLater"]["AM"], "SKY");
+
+                        // todayInfo["SKY"] = getDataSumResult(todayInfo, skyLengths["today"]["PM"], "SKY");
+                        // tomorrowInfo["SKY"] = getDataSumResult(tomorrowInfo, skyLengths["tomorrow"]["PM"], "SKY");
+                        // threeDaysLaterInfo["SKY"] = getDataSumResult(threeDaysLaterInfo, skyLengths["threeDaysLater"]["PM"], "SKY");
+
+
+  console.log(todayInfo, tomorrowInfo, threeDaysLaterInfo)
   return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
 
 }
 
-function getPOPResult(data, Datalength){
-  return ((data["POP"].reduce((a, b) => Number(a) + Number(b), 0)) / Datalength).toFixed(0);
+function getDataSumResult(data, Datalength, type){
+  return ((data[type].reduce((a, b) => Number(a) + Number(b), 0)) / Datalength).toFixed(0);
 }
 
 export function getNowHours() {

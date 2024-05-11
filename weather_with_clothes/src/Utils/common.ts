@@ -113,6 +113,18 @@ export function threeDaysWeatherInfo(data){
     },
   };
 
+  let ptyLengths = {
+    "today": {
+
+    },
+    "tomorrow": {
+
+    },
+    "threeDaysLater": {
+
+    },
+  };
+
   const todayMinTempArr:number[] = [];
 
   data.forEach(ele => {
@@ -123,8 +135,14 @@ export function threeDaysWeatherInfo(data){
                 todayInfo["MIN"] = todayMinTempArr.sort((a, b) => a - b)[0];
                 break;
             case "PTY":
-                // todayInfo["PTY"] = ele.fcstValue;
-                todayInfo["PTY"] = Array.isArray(todayInfo["PTY"]) ? [...todayInfo["PTY"], ele.fcstValue] : [ele.fcstValue];
+              case "PTY":
+                if (Number(ele.fcstTime.slice(0, 2)) < 12) {
+                  todayInfo["PTY"] = todayInfo["PTY"] || {};
+                  todayInfo["PTY"]["AM"] = Array.isArray(todayInfo["PTY"]["AM"]) ? [...todayInfo["PTY"]["AM"], ele.fcstValue] : [ele.fcstValue];
+                } else {
+                    todayInfo["PTY"] = todayInfo["PTY"] || {};
+                    todayInfo["PTY"]["PM"] = Array.isArray(todayInfo["PTY"]["PM"]) ? [...todayInfo["PTY"]["PM"], ele.fcstValue] : [ele.fcstValue];
+                }
                 break;
             case "SKY":
                   if (Number(ele.fcstTime.slice(0, 2)) < 12) {
@@ -144,6 +162,15 @@ export function threeDaysWeatherInfo(data){
             }
           } else if (ele.fcstDate === FULL_TOMORROW) {
             switch (ele.category) {
+                case "PTY":
+                  if (Number(ele.fcstTime.slice(0, 2)) < 12) {
+                    tomorrowInfo["PTY"] = tomorrowInfo["PTY"] || {};
+                    tomorrowInfo["PTY"]["AM"] = Array.isArray(tomorrowInfo["PTY"]["AM"]) ? [...tomorrowInfo["PTY"]["AM"], ele.fcstValue] : [ele.fcstValue];
+                  } else {
+                      tomorrowInfo["PTY"] = tomorrowInfo["PTY"] || {};
+                      tomorrowInfo["PTY"]["PM"] = Array.isArray(tomorrowInfo["PTY"]["PM"]) ? [...tomorrowInfo["PTY"]["PM"], ele.fcstValue] : [ele.fcstValue];
+                  }
+                break;
               case "TMN":
                 tomorrowInfo["MIN"] = ele.fcstValue;
                 break;
@@ -165,6 +192,15 @@ export function threeDaysWeatherInfo(data){
                     }
                   } else if (ele.fcstDate === FULL_THREEDAYSLATER) {
                     switch (ele.category) {
+                      case "PTY":
+                        if (Number(ele.fcstTime.slice(0, 2)) < 12) {
+                          threeDaysLaterInfo["PTY"] = threeDaysLaterInfo["PTY"] || {};
+                          threeDaysLaterInfo["PTY"]["AM"] = Array.isArray(threeDaysLaterInfo["PTY"]["AM"]) ? [...threeDaysLaterInfo["PTY"]["AM"], ele.fcstValue] : [ele.fcstValue];
+                        } else {
+                            threeDaysLaterInfo["PTY"] = threeDaysLaterInfo["PTY"] || {};
+                            threeDaysLaterInfo["PTY"]["PM"] = Array.isArray(threeDaysLaterInfo["PTY"]["PM"]) ? [...threeDaysLaterInfo["PTY"]["PM"], ele.fcstValue] : [ele.fcstValue];
+                        }
+                      break;
                       case "TMN":
                         threeDaysLaterInfo["MIN"] = ele.fcstValue;
                         break;
@@ -201,28 +237,57 @@ export function threeDaysWeatherInfo(data){
 
                         skyLengths["threeDaysLater"]["AM"] = threeDaysLaterInfo["SKY"]["AM"].length;
                         skyLengths["threeDaysLater"]["PM"] = threeDaysLaterInfo["SKY"]["PM"].length;
+                                                /////
+                        ptyLengths["today"]["AM"] = todayInfo["PTY"]["AM"].length;
+                        ptyLengths["today"]["PM"] = todayInfo["PTY"]["PM"].length;
+
+                        ptyLengths["tomorrow"]["AM"] = tomorrowInfo["PTY"]["AM"].length;
+                        ptyLengths["tomorrow"]["PM"] = tomorrowInfo["PTY"]["PM"].length;
+
+                        ptyLengths["threeDaysLater"]["AM"] = threeDaysLaterInfo["PTY"]["AM"].length;
+                        ptyLengths["threeDaysLater"]["PM"] = threeDaysLaterInfo["PTY"]["PM"].length;
                         ////////
                         todayInfo["POP"] = getDataSumResult(todayInfo, popLengths["today"], "POP");
                         tomorrowInfo["POP"] = getDataSumResult(tomorrowInfo, popLengths["tomorrow"], "POP");
                         threeDaysLaterInfo["POP"] = getDataSumResult(threeDaysLaterInfo, popLengths["threeDaysLater"], "POP");
 
                         /////
-                        // todayInfo["SKY"] = getDataSumResult(todayInfo, skyLengths["today"]["AM"], "SKY");
-                        // tomorrowInfo["SKY"] = getDataSumResult(tomorrowInfo, skyLengths["tomorrow"]["AM"], "SKY");
-                        // threeDaysLaterInfo["SKY"] = getDataSumResult(threeDaysLaterInfo, skyLengths["threeDaysLater"]["AM"], "SKY");
+                        todayInfo["SKY"]["AM"] = getDataSumResult(todayInfo, skyLengths["today"]["AM"], "SKY-AM");
+                        tomorrowInfo["SKY"]["AM"] = getDataSumResult(tomorrowInfo, skyLengths["tomorrow"]["AM"], "SKY-AM");
+                        threeDaysLaterInfo["SKY"]["AM"] = getDataSumResult(threeDaysLaterInfo, skyLengths["threeDaysLater"]["AM"], "SKY-AM");
 
-                        // todayInfo["SKY"] = getDataSumResult(todayInfo, skyLengths["today"]["PM"], "SKY");
-                        // tomorrowInfo["SKY"] = getDataSumResult(tomorrowInfo, skyLengths["tomorrow"]["PM"], "SKY");
-                        // threeDaysLaterInfo["SKY"] = getDataSumResult(threeDaysLaterInfo, skyLengths["threeDaysLater"]["PM"], "SKY");
+                        todayInfo["SKY"]["PM"] = getDataSumResult(todayInfo, skyLengths["today"]["PM"], "SKY-PM");
+                        tomorrowInfo["SKY"]["PM"] = getDataSumResult(tomorrowInfo, skyLengths["tomorrow"]["PM"], "SKY-PM");
+                        threeDaysLaterInfo["SKY"]["PM"] = getDataSumResult(threeDaysLaterInfo, skyLengths["threeDaysLater"]["PM"], "SKY-PM");
+                        ///
 
+                                                /////
+                        todayInfo["PTY"]["AM"] = getDataSumResult(todayInfo, skyLengths["today"]["AM"], "PTY-AM");
+                        tomorrowInfo["PTY"]["AM"] = getDataSumResult(tomorrowInfo, skyLengths["tomorrow"]["AM"], "PTY-AM");
+                        threeDaysLaterInfo["PTY"]["AM"] = getDataSumResult(threeDaysLaterInfo, skyLengths["threeDaysLater"]["AM"], "PTY-AM");
 
-  console.log(todayInfo, tomorrowInfo, threeDaysLaterInfo)
+                        todayInfo["PTY"]["PM"] = getDataSumResult(todayInfo, skyLengths["today"]["PM"], "PTY-PM");
+                        tomorrowInfo["PTY"]["PM"] = getDataSumResult(tomorrowInfo, skyLengths["tomorrow"]["PM"], "PTY-PM");
+                        threeDaysLaterInfo["PTY"]["PM"] = getDataSumResult(threeDaysLaterInfo, skyLengths["threeDaysLater"]["PM"], "PTY-PM");
+
+                        console.log(todayInfo, tomorrowInfo)
+
   return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
 
 }
 
 function getDataSumResult(data, Datalength, type){
-  return ((data[type].reduce((a, b) => Number(a) + Number(b), 0)) / Datalength).toFixed(0);
+  if(type === "SKY-PM") {
+    return ((data["SKY"]["PM"].reduce((a, b) => Number(a) + Number(b), 0)) / Datalength).toFixed(0);
+  } else if (type === "SKY-AM"){
+    return ((data["SKY"]["AM"].reduce((a, b) => Number(a) + Number(b), 0)) / Datalength).toFixed(0);
+  } else if(type === "PTY-PM") {
+    return ((data["PTY"]["PM"].reduce((a, b) => Number(a) + Number(b), 0)) / Datalength).toFixed(0);
+  } else if (type === "PTY-AM"){
+    return ((data["PTY"]["AM"].reduce((a, b) => Number(a) + Number(b), 0)) / Datalength).toFixed(0);
+  } else {
+    return ((data[type].reduce((a, b) => Number(a) + Number(b), 0)) / Datalength).toFixed(0);
+  }
 }
 
 export function getNowHours() {

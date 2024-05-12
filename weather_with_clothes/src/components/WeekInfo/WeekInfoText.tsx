@@ -1,11 +1,12 @@
 import React from 'react';
+import RainDrop from '../Icons/RainDrop';
 
 export default function WeekInfoText({ props }) {
 	const { MAX, MIN, SKY, PTY, TMN, TMX, POP } = props;
 
 	return (
 		<div className='block' key={Math.random()}>
-			<span className='pr-1'>{POP}</span>
+			<RainDrop percent={POP}/>
 			<span className='pr-1'>{PTY.AM}</span>
 			<span className='pr-1'>{PTY.PM}</span>
 			<span className='pr-1'>{SKY.AM}</span>

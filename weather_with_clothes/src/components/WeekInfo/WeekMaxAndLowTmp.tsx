@@ -1,6 +1,7 @@
 import React from 'react';
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import WaterDropRoundedIcon from '@mui/icons-material/WaterDropRounded';
+import RainDrop from '../Icons/RainDrop';
 
 export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 	return (
@@ -13,9 +14,9 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.map((ele: any, index: number) => {
 								return (
 									<>
-                    <span>{<WaterDropIcon/>}</span>
 										<p key={Math.random()} className='mr-2'>
-											{ele}
+                      <RainDrop percent={ele}/>
+											{ele}%
 										</p>
 									</>
 								);

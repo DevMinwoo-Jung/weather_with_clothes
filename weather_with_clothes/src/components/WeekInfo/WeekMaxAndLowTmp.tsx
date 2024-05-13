@@ -8,13 +8,13 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 		<>
 			{weekData && weekInformationData && (
 				<div className='flex'>
-					<div>
+					<div className=''>
 						{weekInformationData.rainParis
 							.slice(0, 4)
 							.map((ele: any, index: number) => {
 								return (
 									<>
-										<p key={Math.random()} className='mr-2'>
+										<p key={Math.random()} className='h-7 mr-2'>
                       <RainDrop percent={ele}/>
 											{ele}%
 										</p>
@@ -28,7 +28,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.map((ele: any, index: number) => {
 								return (
 									<>
-										<p key={Math.random()} className='mr-2'>
+										<p key={Math.random()} className='mr-2 h-7'>
 											{ele}
 										</p>
 									</>
@@ -41,7 +41,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.map((ele: any, index: any) => {
 								return (
 									<>
-										<p key={Math.random()} className='mr-2'>
+										<p key={Math.random()} className='mr-2 h-7'>
 											{ele}
 										</p>
 									</>
@@ -54,7 +54,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.map((ele: any, index: any) => {
 								return (
 									<>
-										<p key={Math.random()} className='mr-2'>
+										<p key={Math.random()} className='mr-2 h-7'>
 											{ele}
 										</p>
 									</>
@@ -65,7 +65,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.map((ele: any, index: any) => {
 								return (
 									<>
-										<p key={Math.random()} className='mr-2'>
+										<p key={Math.random()} className='mr-2 h-7'>
 											{ele}
 										</p>
 									</>

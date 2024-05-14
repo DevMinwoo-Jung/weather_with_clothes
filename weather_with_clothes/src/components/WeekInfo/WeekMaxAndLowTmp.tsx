@@ -2,6 +2,7 @@ import React from 'react';
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import WaterDropRoundedIcon from '@mui/icons-material/WaterDropRounded';
 import RainDrop from '../Icons/RainDrop';
+import Weather from '../Icons/Weather';
 
 export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 	return (
@@ -27,11 +28,14 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.slice(0, 4)
 							.map((ele: any, index: number) => {
 								return (
-									<>
-										<p key={Math.random()} className='mr-2 h-7'>
-											{ele}
-										</p>
-									</>
+									<div className='flex'>
+										<span key={Math.random()} className='mr-2 h-7 pt-1'>
+											<Weather condition={ele.split(" ")[0]}/>
+										</span>
+										<span key={Math.random()} className='mr-2 h-7 pt-1'>
+											<Weather condition={ele.split(" ")[1]}/>
+										</span>
+									</div>
 								);
 							})}
 					</div>

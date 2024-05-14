@@ -8,14 +8,14 @@ export default function RainDrop({percent}) {
   let raindropIcon:any = "";
 
   if(percent < 31){
-    raindropIcon = <WaterDropOutlinedIcon/>
+    raindropIcon = <WaterDropOutlinedIcon fontSize='small'/>
   } else if (percent < 71) {
-    raindropIcon = <WaterDropTwoToneIcon/>
+    raindropIcon = <WaterDropTwoToneIcon fontSize='small'/>
   } else {
-    raindropIcon = <WaterDropIcon/>
+    raindropIcon = <WaterDropIcon fontSize='small'/>
   }
 
   return (
-    <span>{raindropIcon}</span>
+    <span className='pr-1'>{raindropIcon}</span>
   )
 }

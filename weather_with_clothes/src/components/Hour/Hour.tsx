@@ -35,7 +35,6 @@ export default function Hour(props:HourType) {
               <p className='text-xl'>{TMP}°</p>
               <p>{REH}</p>
               <p>{POP}</p> 
-              {/* 강수확률 */}
             </div>
           );
         })

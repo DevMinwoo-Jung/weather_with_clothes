@@ -9,7 +9,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 		<>
 			{weekData && weekInformationData && (
 				<div className='flex'>
-					<div className=''>
+					<div className='pr-2'>
 						{weekInformationData.rainParis
 							.slice(0, 4)
 							.map((ele: any, index: number) => {
@@ -28,7 +28,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.slice(0, 4)
 							.map((ele: any, index: number) => {
 								return (
-									<div className='flex'>
+									<div className='flex pr-10'>
 										<span key={Math.random()} className='mr-2 h-7 pt-1'>
 											<Weather condition={ele.split(" ")[0]}/>
 										</span>
@@ -45,32 +45,21 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.map((ele: any, index: any) => {
 								return (
 									<>
-										<p key={Math.random()} className='mr-2 h-7'>
-											{ele}
+										<p key={Math.random()} className='pr-2 mr-2 h-7'>
+											{ele}°
 										</p>
 									</>
 								);
 							})}
 					</div>
 					<div className='block' key={Math.random()}>
-						{Object.values(weekInformationData)
-							.slice(11)
-							.map((ele: any, index: any) => {
-								return (
-									<>
-										<p key={Math.random()} className='mr-2 h-7'>
-											{ele}
-										</p>
-									</>
-								);
-							})}
 						{Object.values(weekData.lowTempData)
 							.slice(0, 4)
 							.map((ele: any, index: any) => {
 								return (
 									<>
 										<p key={Math.random()} className='mr-2 h-7'>
-											{ele}
+											{ele}°
 										</p>
 									</>
 								);

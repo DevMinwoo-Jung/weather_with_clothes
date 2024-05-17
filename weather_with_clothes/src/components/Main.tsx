@@ -3,8 +3,6 @@ import { FULL_TODAY } from '../API/weather';
 
 export default function Main({todayData}) {
 
-  console.log(todayData);
-
   const todayMaxTemp = Math.round(todayData.filter(ele=> ele.fcstDate === FULL_TODAY && ele.category === "TMX")[0].fcstValue);
   const todayMinTemp = Math.round(todayData.filter(ele=> ele.fcstDate === FULL_TODAY && ele.category === "TMP").sort((a, b) => Number(a.fcstValue) - Number(b.fcstValue))[0].fcstValue);
   const nowTemp = todayData.filter(ele=> ele.fcstDate === FULL_TODAY && ele.category === "TMP" && Number(ele.fcstTime.slice(0,2)) === new Date().getHours())[0].fcstValue;

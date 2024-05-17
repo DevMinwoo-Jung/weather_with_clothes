@@ -11,7 +11,8 @@ import { CiCloudOn } from "react-icons/ci";
 import { IoSunnyOutline } from "react-icons/io5";
 
 export default function Weather({condition}) {
-
+  console.log(condition)
+  let icon =  "";
   if(typeof(condition) === "string") {
     if (condition.includes("구름많음")) {
       if (condition.includes("비")) {
@@ -26,9 +27,10 @@ export default function Weather({condition}) {
           // 구름 많음
           return <CiCloudOn/>
       }
-    } else if (condition.includes("흐림")) {
+    } else if (condition.includes("흐리고")) {
       if (condition.includes("비")) {
           // 흐림, 비/
+          console.log('여기오지?')
           return <IoRainy />
       } else if (condition.includes("눈")) {
         // 흐림, 눈
@@ -40,6 +42,7 @@ export default function Weather({condition}) {
         return <FaCloud/>
       }
     } else if(condition.includes("비")) {
+      return <IoRainy />
       // return <FontAwesomeIcon icon="fa-sharp fa-thin fa-raindrops" />
     } else if(condition.includes("눈")) {
       return <IconWiSnow/>

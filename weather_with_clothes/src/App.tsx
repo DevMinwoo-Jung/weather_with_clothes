@@ -17,6 +17,8 @@ import TwentyFourWeatherGraph from './components/TwentyFourWeatherGraph';
 import WeekSummary from './components/WeekSummary';
 import { getTwentyHours, threeDaysWeatherInfo } from './Utils/common';
 import * as xlsx from 'xlsx';
+import Search from './components/Search';
+
 
 function App() {
 	const { isPending, status, data, error, isFetching } = useTodayWeatherInfo(
@@ -25,6 +27,7 @@ function App() {
 	const [twentyFourHourData, setTwentyFourHourData] = useState<any>(null); // null로 초기화
 	const [threeDaysWeatherData, setThreeDaysWeatherData] = useState<any>(null); // null로 초기화
 	
+
 	const [file, setFile] = useState(null);
   const [jsonData, setJsonData] = useState("");
 
@@ -46,7 +49,6 @@ function App() {
 	useEffect(() => {
 		if (status === 'success') {
 			const example = getTwentyHours(data.resultData);
-			console.log(data.fullData);
 			const ex2 = threeDaysWeatherInfo(data.fullData);
 			setTwentyFourHourData(example);
 			setThreeDaysWeatherData(ex2);
@@ -60,6 +62,7 @@ function App() {
 	return (
 		<div className='min-w-screen min-h-screen bg-slate-500 text-white font-bold'>
 			<div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl'>
+				<Search/>
 				<Header />
 				<Main todayData={data.fullData}/>
 				<TwentyFourWeatherGraph twentyFourHourData={twentyFourHourData} />
@@ -67,13 +70,13 @@ function App() {
 				<WeekSummary threeDaysWeatherData={threeDaysWeatherData} />
 			</div>
 			<div>
-      <input
+      {/* <input
         type="file"
         accept=".xls,.xlsx"
         onChange={(e) => setFile(e.target.files[0])}
       />
       <button onClick={handleConvert}>Convert</button>
-      <pre>{jsonData}</pre>
+      <pre>{jsonData}</pre> */}
     </div>
 		</div>
 	);

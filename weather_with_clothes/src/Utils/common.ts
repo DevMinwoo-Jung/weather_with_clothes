@@ -14,7 +14,6 @@ export function getCurrentDate() {
   const _month = month
   const _date  = date
   const hours = Number(dateObj.getHours()) <= 18 ? '0600' : '1800';
-  console.log(dateObj.getHours());
   return `${_year}${_month}${_date}${hours}`;
 }
 
@@ -203,8 +202,6 @@ export function threeDaysWeatherInfo(data){
   todayInfo["PTY"]["PM"] = getDataSumResult(todayInfo, skyLengths["today"]["PM"], "PTY", "PM");
   tomorrowInfo["PTY"]["PM"] = getDataSumResult(tomorrowInfo, skyLengths["tomorrow"]["PM"], "PTY", "PM");
   threeDaysLaterInfo["PTY"]["PM"] = getDataSumResult(threeDaysLaterInfo, skyLengths["threeDaysLater"]["PM"], "PTY", "PM");
-  
-  console.log(todayInfo, tomorrowInfo)
 
   return { todayInfo, tomorrowInfo, threeDaysLaterInfo }; 
 

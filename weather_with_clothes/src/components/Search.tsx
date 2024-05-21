@@ -1,16 +1,38 @@
 import React, { useState } from 'react'
 import { hangjungdong } from '../Utils/hangjungdong';
-import { beobjungdong } from '../Utils/beobjungdong'
+import { beobjungdong } from '../Utils/beobjungdong';
+import { Ibeobjungdong } from '../Utils/dataType';
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [result, setResult] = useState<any>([]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  // console.log(hangjungdong.filter((ele) => console.log(ele["1단계"])))
-  console.log(beobjungdong)
+  const getResult = () => {
+    if(searchTerm.length > 1) {
+      console.log(searchTerm)
+      setResult(beobjungdong.filter((ele:any) => ele.lgdng_nm.includes(searchTerm)));
+      console.log(result)
+    }
+  };
+
+  console.log(hangjungdong);
+  console.log(beobjungdong.filter((ele) => ele["행정구역코드"] == "4817067300"));
+
+  const convertToHangjungdong = (event) => {
+
+    const dataValue1 = event.currentTarget.getAttribute('data-region_1tear');
+    const dataValue2 = event.currentTarget.getAttribute('data-region_2tear');
+    const dataValue3 = event.currentTarget.getAttribute('data-region_3tear');
+    console.log(dataValue1, dataValue2, dataValue3);
+
+    const test = hangjungdong.filter((ele) => ele["1단계"] === dataValue1 && ele["2단계"] === dataValue2 && ele["3단계"] === dataValue3)
+
+    console.log(test)
+  }
 
 
 
@@ -20,12 +42,20 @@ export default function Search() {
         type="text" 
         value={searchTerm} 
         onChange={handleSearch} 
+        onKeyUp={getResult} 
         placeholder="Search..." 
+        className='bg-black'
       />
       <ul>
-        {/* {Object.values(filteredData).map((item, index) => (
-          <li key={index}>{item}</li>
-        ))} */}
+        {result.map((item:Ibeobjungdong, index) => (
+          <div className='flex' onClick={convertToHangjungdong} 
+            data-region_1tear={item.ctpv_nm} data-region_2tear={item.ctgg_nm} data-region_3tear={item.adstrd_nm} 
+          key={item.admn_inst_cd}>
+            <li className='mr-1' key={Math.random()}>{item.ctpv_nm}</li>
+            <li className='mr-1' key={Math.random()}>{item.ctgg_nm}</li>
+            <li className='mr-1' key={Math.random()}>{item.lgdng_nm}</li>
+          </div>
+        ))}
       </ul>
     </div>
   );

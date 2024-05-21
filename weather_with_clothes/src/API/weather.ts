@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { dailyWeatherInfoParam, shortLiveWeatherParam, todayWeatherInfoParam } from '../Utils/weatherType';
+import { dailyWeatherInfoParam, shortLiveWeatherParam, todayWeatherInfoParam } from '../Utils/dataType';
 import { DAILY_FORCAST_END_POINT, MID_TERM_TEMP_END_POINT, TODAY_FORCAST_END_POINT, WEEK_LAND_FORCAST_END_POINT } from './weatherEndPoint';
 import { getCurrentDate, getOneWeek, getOneWeekAgo, getThreeDaysLaterFullDate, getTmorrowFullDate, getTodayFullDate } from '../Utils/common';
-import { twentyFourHourData } from '../Utils/weatherType';
+import { twentyFourHourData } from '../Utils/dataType';
 
 const SERVICE_KEY = import.meta.env.VITE_REACT_APP_MID_FORECAST_KEY;
 export const FULL_TODAY =  getTodayFullDate();

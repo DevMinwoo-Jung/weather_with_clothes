@@ -67,3 +67,15 @@ export type hourResult = {
   REH?: string;
   SNO?: string;
 }
+
+
+export interface Ibeobjungdong {
+  lgdng_cd: number
+  ctpv_nm: string
+  ctgg_nm: string
+  adstrd_nm: string
+  adstrd_en_nm: string
+  lgdng_nm: string
+  adstrd_cd: number
+  admn_inst_cd: number
+}

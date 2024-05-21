@@ -1,5 +1,5 @@
 import { FULL_THREEDAYSLATER, FULL_TODAY, FULL_TOMORROW } from "../API/weather";
-import { twentyFourHourData } from "./weatherType";
+import { twentyFourHourData } from "./dataType";
 
 const dateObj = new Date();
 const year = dateObj.getFullYear();

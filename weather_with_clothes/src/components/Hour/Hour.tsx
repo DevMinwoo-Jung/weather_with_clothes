@@ -1,5 +1,5 @@
 import React from 'react'
-import { hourResult } from '../../Utils/weatherType';
+import { hourResult } from '../../Utils/dataType';
 
 type HourType = {
   twentyFourHourData: any;

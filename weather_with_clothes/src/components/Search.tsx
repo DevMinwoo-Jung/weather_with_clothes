@@ -13,28 +13,23 @@ export default function Search() {
 
   const getResult = () => {
     if(searchTerm.length > 1) {
-      console.log(searchTerm)
-      setResult(beobjungdong.filter((ele:any) => ele.lgdng_nm.includes(searchTerm)));
-      console.log(result)
+      setResult(beobjungdong.filter((ele) => ele.ctgg_nm !== ele.lgdng_nm).filter((ele:any) => ele.lgdng_nm.includes(searchTerm)));
+      console.log(result);
+    } else if (searchTerm.length <= 1){
+      setResult([]);
     }
   };
-
-  console.log(hangjungdong);
-  console.log(beobjungdong.filter((ele) => ele["행정구역코드"] == "4817067300"));
 
   const convertToHangjungdong = (event) => {
 
     const dataValue1 = event.currentTarget.getAttribute('data-region_1tear');
     const dataValue2 = event.currentTarget.getAttribute('data-region_2tear');
     const dataValue3 = event.currentTarget.getAttribute('data-region_3tear');
-    console.log(dataValue1, dataValue2, dataValue3);
 
     const test = hangjungdong.filter((ele) => ele["1단계"] === dataValue1 && ele["2단계"] === dataValue2 && ele["3단계"] === dataValue3)
 
     console.log(test)
   }
-
-
 
   return (
     <div>

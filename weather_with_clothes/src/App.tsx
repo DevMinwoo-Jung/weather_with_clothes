@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import './index.css';
 import {
-	dailyInfoDefaultParam,
 	todayInfoDefaultParam,
-	useDailyWeatherInfo,
-	useShortLiveWeather,
 	useTodayWeatherInfo,
 } from './API/weather';
 import React from 'react';
@@ -21,16 +18,19 @@ import Search from './components/Search';
 
 
 function App() {
+	const [searchKeyword, setSearchKeyword] = useState(todayInfoDefaultParam);
+	const [dong, setDong] = useState();
+	
 	const { isPending, status, data, error, isFetching } = useTodayWeatherInfo(
-		todayInfoDefaultParam
+		searchKeyword
 	);
+	
 	const [twentyFourHourData, setTwentyFourHourData] = useState<any>(null); // null로 초기화
 	const [threeDaysWeatherData, setThreeDaysWeatherData] = useState<any>(null); // null로 초기화
-	
 
 	const [file, setFile] = useState(null);
   const [jsonData, setJsonData] = useState("");
-
+	
   const handleConvert = () => {
     if (file) {
       const reader = new FileReader();
@@ -45,8 +45,8 @@ function App() {
       reader.readAsBinaryString(file);
     }
   };
-
 	useEffect(() => {
+	
 		if (status === 'success') {
 			const example = getTwentyHours(data.resultData);
 			const ex2 = threeDaysWeatherInfo(data.fullData);
@@ -62,8 +62,8 @@ function App() {
 	return (
 		<div className='min-w-screen min-h-screen bg-slate-500 text-white font-bold'>
 			<div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl relative'>
-				<Search/>
-				<Header />
+				<Search setSearchKeyword={setSearchKeyword} setDong={setDong}/>
+				<Header dong={dong} />
 				<Main todayData={data.fullData}/>
 				<TwentyFourWeatherGraph twentyFourHourData={twentyFourHourData} />
 				<Summary />

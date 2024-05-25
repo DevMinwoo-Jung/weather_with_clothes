@@ -12,13 +12,13 @@ import { getTodayFullDate, getTwentyHours, threeDaysWeatherInfo } from './Utils/
 import * as xlsx from 'xlsx';
 import Search from './components/Search';
 import SkletonMain from './components/Skeleton/SkletonMain';
-import { beobjungdong } from './Utils/beobjungdong';
 import { hangjungdong } from './Utils/hangjungdong';
 
 function App() {
     const userLocation = useGeolocation();
     const [searchKeyword, setSearchKeyword] = useState(null);
-    const [dong, setDong] = useState(null);
+    const [dong, setDong] = useState<any>(null);
+		const [defaultDong, setDefaultDong] = useState(null)
 
     useEffect(() => {
         if (userLocation) {
@@ -29,8 +29,8 @@ function App() {
                 base_time: "0500",
                 nx: userLocation.x,
                 ny: userLocation.y,
-								latitude: Math.trunc(userLocation.lat),
-								longitude: Math.trunc(userLocation.lng)
+								latitude: userLocation.lat,
+								longitude: userLocation.lng
             });
         }
 
@@ -49,13 +49,13 @@ function App() {
             const ex2 = threeDaysWeatherInfo(data.fullData);
             setTwentyFourHourData(example);
             setThreeDaysWeatherData(ex2);
-						
-						console.log(hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]) && (ele["위도(시)"] == searchKeyword!["latitude"]) && (ele["경도(시)"] == searchKeyword!["longitude"]))))
+						let wwwwww = hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]))); 
 						console.log(hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]))))
-						console.log(Object.values(hangjungdong).filter((ele)=> ele["격자 X"] == searchKeyword["nx"]))
-						console.log(searchKeyword["latitude"])
-						console.log(searchKeyword["nx"])
-
+						const x = getNearNumber(searchKeyword!["latitude"], wwwwww, "위도(초/100)");
+						const y = getNearNumber(searchKeyword!["longitude"], wwwwww, "경도(초/100)");
+						//setDefaultDong(hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]))).filter(ele => Number(ele["위도(초/100)"]) === x)[0])
+						setDefaultDong(searchKeyword)
+					
         }
     }, [data, status]);
 
@@ -67,7 +67,7 @@ function App() {
         <div className='min-w-screen min-h-screen bg-slate-500 text-white font-bold'>
             <div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl relative'>
                 <Search setSearchKeyword={setSearchKeyword} setDong={setDong} />
-                <Header dong={dong} />
+                <Header userLocation={userLocation} dong={dong} />
                 <Main todayData={data?.fullData} />
                 <TwentyFourWeatherGraph twentyFourHourData={twentyFourHourData} />
                 <Summary />
@@ -80,3 +80,21 @@ function App() {
 }
 
 export default App;
+
+
+function getNearNumber(value, compareArr, flag) {
+	let nearestValue = null;
+	let minDifference = Infinity;
+
+	compareArr.forEach((ele) => {
+		const currentValue = Number(ele[flag]);
+		const difference = Math.abs(currentValue - value);
+
+		if (difference < minDifference) {
+			minDifference = difference;
+			nearestValue = currentValue;
+		}
+	});
+
+	return nearestValue;
+}

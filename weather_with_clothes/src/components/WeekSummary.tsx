@@ -5,10 +5,11 @@ import {
 	fetchWeekWeatherInfoParam,
 	useWeekWeatherInfo,
 } from '../API/weather';
-import { filterData, filterLandData, getTwentyHours } from '../Utils/common';
+import { filterData, filterLandData } from '../Utils/common';
 import WeekInfoDays from './WeekInfo/WeekInfoDays';
 import WeekInfoText from './WeekInfo/WeekInfoText';
 import WeekMaxAndLowTmp from './WeekInfo/WeekMaxAndLowTmp';
+import LoadingSpinner from './Skeleton/LoadingSpinner';
 
 export default function WeekSummary(props) {
 	const { isPending, status, data, error, isFetching } = useShortLiveWeather(
@@ -38,7 +39,7 @@ export default function WeekSummary(props) {
 		}
 	}, [data, status, weekInfoData, weekInfoStatus]);
 
-	if (isPending) return <div>Loading...</div>;
+	if (isPending) return <LoadingSpinner/>;
 
 	if (error) return <div>Error</div>;
 	return (

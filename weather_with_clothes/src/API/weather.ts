@@ -82,13 +82,13 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
   }
 
 
-  export const todayInfoDefaultParam:todayWeatherInfoParam = {
+  export let todayInfoDefaultParam:todayWeatherInfoParam = {
     pageNo: "1",
     numOfRows: "1000",
     base_date: getTodayFullDate(),
     base_time: "0500",
-    nx: "55",
-    ny: "127"
+    nx: "",
+    ny: ""
   }
   
   
@@ -141,7 +141,8 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
     export function useTodayWeatherInfo(todayInfoDefaultParam:todayWeatherInfoParam){
       return useQuery ({
         queryKey: ['todayInfo', todayInfoDefaultParam],
-        queryFn: () => fetchTodayWeatherInfo(todayInfoDefaultParam)
+        queryFn: () => fetchTodayWeatherInfo(todayInfoDefaultParam),
+        enabled: !!todayInfoDefaultParam
       });
     }
 

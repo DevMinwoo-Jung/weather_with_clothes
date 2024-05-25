@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 
-/*
-*   위도경도 좌표 변환
-*/
 var RE = 6371.00877; // 지구 반경(km)
 var GRID = 5.0; // 격자 간격(km)
 var SLAT1 = 30.0; // 투영 위도1(degree)
@@ -10,9 +7,7 @@ var SLAT2 = 60.0; // 투영 위도2(degree)
 var OLON = 126.0; // 기준점 경도(degree)
 var OLAT = 38.0; // 기준점 위도(degree)
 var XO = 43; // 기준점 X좌표(GRID)
-var YO = 136; // 기1준점 Y좌표(GRID)
-
-// LCC DFS 좌표변환 ( code : "toXY"(위경도->좌표, v1:위도, v2:경도), "toLL"(좌표->위경도,v1:x, v2:y) )
+var YO = 136; // 기준점 Y좌표(GRID)
 
 function dfs_xy_conv(code, v1, v2) {
     var DEGRAD = Math.PI / 180.0;
@@ -31,7 +26,7 @@ function dfs_xy_conv(code, v1, v2) {
     var ro = Math.tan(Math.PI * 0.25 + olat * 0.5);
     ro = re * sf / Math.pow(ro, sn);
     var rs = {};
-    if (code == "toXY") {
+    if (code === "toXY") {
         rs['lat'] = v1;
         rs['lng'] = v2;
         var ra = Math.tan(Math.PI * 0.25 + (v1) * DEGRAD * 0.5);
@@ -42,8 +37,7 @@ function dfs_xy_conv(code, v1, v2) {
         theta *= sn;
         rs['x'] = Math.floor(ra * Math.sin(theta) + XO + 0.5);
         rs['y'] = Math.floor(ro - ra * Math.cos(theta) + YO + 0.5);
-    }
-    else {
+    } else {
         rs['x'] = v1;
         rs['y'] = v2;
         var xn = v1 - XO;
@@ -55,60 +49,44 @@ function dfs_xy_conv(code, v1, v2) {
 
         if (Math.abs(xn) <= 0.0) {
             theta = 0.0;
-        }
-        else {
+        } else {
             if (Math.abs(yn) <= 0.0) {
                 theta = Math.PI * 0.5;
                 if (xn < 0.0) - theta;
-            }
-            else theta = Math.atan2(xn, yn);
+            } else theta = Math.atan2(xn, yn);
         }
         var alon = theta / sn + olon;
         rs['lat'] = alat * RADDEG;
         rs['lng'] = alon * RADDEG;
     }
+    console.log(rs)
     return rs;
 }
 
 function useGeolocation() {
+    const [userLocation, setUserLocation] = useState<any>(null);
 
-  const [userLocation, setUserLocation] = useState({});
-
-      // define the function that finds the users geolocation
-      const getUserLocation = () => {
-        // if geolocation is supported by the users browser
+    const getUserLocation = () => {
         if (navigator.geolocation) {
-          // get the current users location
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              // save the geolocation coordinates in two variables
-              const { latitude, longitude } = position.coords;
-              // update the value of userlocation variable
-              setUserLocation(dfs_xy_conv("toXY", latitude, longitude));
-              // console.log(userLocation);
-              // console.log(dfs_xy_conv("toXY", latitude, longitude))
-            },
-            // if there was an error getting the users location
-            (error) => {
-              console.error('Error getting user location:', error);
-            }
-          );
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setUserLocation(dfs_xy_conv("toXY", latitude, longitude));
+                },
+                (error) => {
+                    console.error('Error getting user location:', error);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
         }
-        // if geolocation is not supported by the users browser
-        else {
-          console.error('Geolocation is not supported by this browser.');
-        }
-      };
-  
-  useEffect(()=> {
+    };
 
-    getUserLocation();
+    useEffect(() => {
+        getUserLocation();
+    }, []);
 
-  }, [])
-
-
-  return { userLocation } 
-
+    return userLocation;
 }
 
 export default useGeolocation;

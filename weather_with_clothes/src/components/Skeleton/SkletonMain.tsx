@@ -1,5 +1,4 @@
 import React from 'react'
-import Skeleton from './Skeleton'
 import LoadingSpinner from './LoadingSpinner'
 import { BsSearch } from 'react-icons/bs'
 import Home from '../Icons/Home'

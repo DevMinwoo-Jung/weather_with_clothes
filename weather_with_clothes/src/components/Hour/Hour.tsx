@@ -34,7 +34,7 @@ export default function Hour(props:HourType) {
               <span className='text-sm'>{TIME}</span>
               <p className='text-xl'>{TMP}°</p>
               <p>{REH}</p>
-              <p>{POP}</p> 
+              <p>{POP}%</p> 
             </div>
           );
         })

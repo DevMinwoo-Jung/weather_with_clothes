@@ -15,6 +15,7 @@ import WeekSummary from './components/WeekSummary';
 import { getTwentyHours, threeDaysWeatherInfo } from './Utils/common';
 import * as xlsx from 'xlsx';
 import Search from './components/Search';
+import SkletonMain from './components/Skeleton/SkletonMain';
 
 
 function App() {
@@ -55,7 +56,7 @@ function App() {
 		}
 	}, [data, status]); // useEffect will trigger when data or status changes
 
-	if (isPending) return <div>Loading...</div>;
+	if (isPending) return <SkletonMain/>;
 
 	if (error) return <div>Error</div>;
 

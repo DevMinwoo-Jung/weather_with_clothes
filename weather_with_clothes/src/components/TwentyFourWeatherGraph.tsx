@@ -2,26 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { todayInfoDefaultParam, useTodayWeatherInfo } from '../API/weather';
 import { getTwentyHours, threeDaysWeatherInfo } from '../Utils/common';
 import Hour from './Hour/Hour';
+import ChartExample from './Chart/Chart';
 
 export default function TwentyFourWeatherGraph(props) {
 
-  const {twentyFourHourData } = props;
+  const { twentyFourHourData } = props;
 
-  // const { isPending, status, data, error, isFetching } = useTodayWeatherInfo(todayInfoDefaultParam);
-  // const [twentyFourHourData, setTwentyFourHourData] = useState<any>(null); // null로 초기화
-  // const [threeDaysWeatherData, setThreeDaysWeatherData] = useState<any>(null); // null로 초기화
-
-  // useEffect(() => {
-  //   if (status === 'success') {
-  //     const example = getTwentyHours(data.resultData);
-  //     threeDaysWeatherInfo(data.fullData);
-  //     setTwentyFourHourData(example);
-  //   }
-  // }, [data, status]); // useEffect will trigger when data or status changes
-
-  // if(isPending) return <div>Loading...</div>
-
-  // if(error) return <div>Error</div>
+  if (!twentyFourHourData) {
+    return <div>Loading...</div>; // 데이터가 없는 경우 로딩 상태를 표시
+  }
 
 
   return (
@@ -30,10 +19,15 @@ export default function TwentyFourWeatherGraph(props) {
       <div className='border-t-2 mb-2'></div>
       <div className='flex overflow-x-scroll no-scrollbar whitespace-nowrap'>
       {twentyFourHourData && (
-        <>
-          <Hour twentyFourHourData={twentyFourHourData} type='today'/>
-          <Hour twentyFourHourData={twentyFourHourData} type='tomorrow'/>
-        </>
+        <div className='block'>
+          <div className='flex'>
+            <Hour twentyFourHourData={twentyFourHourData} type='today'/>
+            <Hour twentyFourHourData={twentyFourHourData} type='tomorrow'/>
+          </div>
+          <div className='block'>
+            <ChartExample twentyFourHourData={twentyFourHourData}/>
+          </div>
+        </div>
       )}
       </div>
     </div>

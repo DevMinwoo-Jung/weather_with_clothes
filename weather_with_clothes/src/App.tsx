@@ -9,10 +9,10 @@ import Summary from './components/Summary';
 import TwentyFourWeatherGraph from './components/TwentyFourWeatherGraph';
 import WeekSummary from './components/WeekSummary';
 import { getTodayFullDate, getTwentyHours, threeDaysWeatherInfo } from './Utils/common';
-import * as xlsx from 'xlsx';
 import Search from './components/Search';
 import SkletonMain from './components/Skeleton/SkletonMain';
 import { hangjungdong } from './Utils/hangjungdong';
+import ChartExample from './components/Chart/Chart';
 
 function App() {
     const userLocation = useGeolocation();
@@ -49,11 +49,9 @@ function App() {
             const ex2 = threeDaysWeatherInfo(data.fullData);
             setTwentyFourHourData(example);
             setThreeDaysWeatherData(ex2);
-						let wwwwww = hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]))); 
-						console.log(hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]))))
-						const x = getNearNumber(searchKeyword!["latitude"], wwwwww, "위도(초/100)");
-						const y = getNearNumber(searchKeyword!["longitude"], wwwwww, "경도(초/100)");
-						//setDefaultDong(hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]))).filter(ele => Number(ele["위도(초/100)"]) === x)[0])
+						let hangjungdongArr = hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]))); 
+						const x = getNearNumber(searchKeyword!["latitude"], hangjungdongArr, "위도(초/100)");
+						const y = getNearNumber(searchKeyword!["longitude"], hangjungdongArr, "경도(초/100)");
 						setDefaultDong(searchKeyword)
 					
         }

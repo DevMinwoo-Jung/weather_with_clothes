@@ -13,7 +13,7 @@ export default function WeekInfoImg() {
 		<div>
 			{weekDays &&
 				weekDays.map((ele: string) => {
-					return <p className='leading-7 pr-56 h-7'>{ele}</p>;
+					return <p key={ele} className='leading-7 pr-56 h-7'>{ele}</p>;
 				})}
 		</div>
 	);

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Home from './Icons/Home'
 import { HiOutlineOfficeBuilding } from 'react-icons/hi';
-import { hangjungdong } from '../Utils/hangjungdong';
-import { beobjungdong } from '../Utils/beobjungdong'
 import axios from 'axios';
 
 
@@ -13,10 +11,6 @@ export default function Header({userLocation, dong}) {
   const [ex, setEx] = useState();
 
 const kakaoApiKey = import.meta.env.VITE_REACT_APP_KAKAO_ADMIN_KEY; // 카카오 API 키
-
-console.log(kakaoApiKey)
-
-  console.log(userLocation)
 
   const toggleRegion = () => {
     if(region === 'HOME') {

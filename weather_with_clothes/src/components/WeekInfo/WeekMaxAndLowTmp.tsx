@@ -28,7 +28,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.slice(0, 4)
 							.map((ele: any, index: number) => {
 								return (
-									<div className='flex pr-10'>
+									<div className='flex pr-10'> 
 										<span key={Math.random()} className='mr-2 h-7 pt-1'>
 											<Weather condition={ele.split(" ")[0]}/>
 										</span>

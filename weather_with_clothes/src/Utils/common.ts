@@ -83,6 +83,9 @@ export function getTwentyHours(data:twentyFourHourData[]) {
       tomorrowData.push(ele);
     }
   })
+
+  todayData["isToday"] = true;
+  tomorrowData["isToday"] = false;
   
   const todayConvertData:any = convertDataToTimeObject(todayData);
   const tomorrowConvertData:any =  convertDataToTimeObject(tomorrowData);
@@ -241,7 +244,7 @@ function compareGPSTimes(time1, time2) {
 
 function convertDataToTimeObject(data) {
   const convertedData = {};
-
+  console.log(data)
   data.forEach(ele => {
     if (!convertedData[ele.fcstTime]) {
       convertedData[ele.fcstTime] = {};
@@ -252,12 +255,18 @@ function convertDataToTimeObject(data) {
     if (!convertedData[ele.fcstTime][ele.category]) {
       convertedData[ele.fcstTime][ele.category] = '';
     }
+
+    // if(data.isToday){
+    //   convertedData["isToday"] = true;
+    // } else {
+    //   convertedData["isToday"] = false;
+    // }
     
     convertedData[ele.fcstTime][ele.category] = ele.fcstValue;
   });
 
   return convertedData;
-}
+} 
 
 function convertTimeToTwentyFourHour(time:string){
 

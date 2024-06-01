@@ -19,7 +19,7 @@ export default function TwentyFourWeatherGraph(props) {
       <div className='border-t-2 mb-2'></div>
       <div className='flex overflow-x-scroll no-scrollbar whitespace-nowrap'>
       {twentyFourHourData && (
-        <div className='block'>
+        <div className='block mr-auto'>
           <div className='flex'>
             <Hour twentyFourHourData={twentyFourHourData} type='today'/>
             <Hour twentyFourHourData={twentyFourHourData} type='tomorrow'/>

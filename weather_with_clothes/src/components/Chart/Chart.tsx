@@ -25,11 +25,11 @@ export default function BasicLineChart({ twentyFourHourData }) {
     width={1150}
     height={100}
     margin={{
-      left: -40,
+      left: 30,
       top: 10
     }}
     series={[{ type: 'line', data: resultArray }]}
-    xAxis={[{ scaleType: 'point', data: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23] }]}
+    xAxis={[{ scaleType: 'point', data: [21,22,23,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] }]}
     sx={{
       [`& .${lineElementClasses.root}`]: {
         stroke: '#8884d8',

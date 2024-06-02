@@ -25,7 +25,7 @@ export default function BasicLineChart({ twentyFourHourData }) {
     width={1150}
     height={100}
     margin={{
-      left: 30,
+      left: 10,
       top: 10
     }}
     series={[{ type: 'line', data: resultArray }]}

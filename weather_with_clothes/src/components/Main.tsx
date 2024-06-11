@@ -1,5 +1,7 @@
 import React from 'react'
 import { FULL_TODAY } from '../API/weather';
+import FirstTop from './Icons/Clothes/firstTop';
+
 
 export default function Main({todayData}) {
 
@@ -43,9 +45,14 @@ export default function Main({todayData}) {
         <p className='text-5xl'>{nowTemp}°</p>
         <p className='mt-8'>{todayMaxTemp}° / {todayMinTemp}°</p>
       </div>
-      <div className='w-1/2'>
-        <p>오늘은 외투챙겨요</p>
-        <p>비와요 우산챙겨요</p>
+      <div className='block'>
+        <div className=''>
+          <p>오늘은 외투챙겨요</p>
+          <p>비와요 우산챙겨요</p>
+        </div>
+        <div className='mt-3'>
+          <FirstTop/>
+        </div>
       </div>
     </section>
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 import { FULL_TODAY } from '../API/weather';
 import FirstTop from './Icons/Clothes/firstTop';
+import TempClothes from './TempClothes';
 
 
 export default function Main({todayData}) {
@@ -36,6 +37,8 @@ export default function Main({todayData}) {
       break;
   }
 
+
+
   return (
     <section className='flex mt-8 h-48'>
       <div className='block w-1/2'>
@@ -50,8 +53,8 @@ export default function Main({todayData}) {
           <p>오늘은 외투챙겨요</p>
           <p>비와요 우산챙겨요</p>
         </div>
-        <div className='mt-3'>
-          <FirstTop/>
+        <div className='mt-3 flex'>
+          <TempClothes MaxTemp={todayMaxTemp}/>
         </div>
       </div>
     </section>

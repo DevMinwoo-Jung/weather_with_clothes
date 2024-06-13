@@ -29,8 +29,8 @@ function App() {
                 base_time: "0500",
                 nx: userLocation.x,
                 ny: userLocation.y,
-								latitude: userLocation.lat,
-								longitude: userLocation.lng
+				latitude: userLocation.lat,
+				longitude: userLocation.lng
             });
         }
 

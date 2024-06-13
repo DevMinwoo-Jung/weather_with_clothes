@@ -1,6 +1,5 @@
 import React from 'react'
 import { FULL_TODAY } from '../API/weather';
-import FirstTop from './Icons/Clothes/firstTop';
 import TempClothes from './TempClothes';
 
 

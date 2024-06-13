@@ -14,11 +14,21 @@ export default function BasicLineChart({ twentyFourHourData }) {
     return <div>Data is not available</div>;
   }
 
-  const todayData = Object.values(twentyFourHourData.todayConvertData)
-  const tomorrowData = Object.values(twentyFourHourData.tomorrowConvertData)
+  const todayData = Object.values(twentyFourHourData.todayConvertData);
+  
+  let tomorrowData = Object.values(twentyFourHourData.tomorrowConvertData).sort((a:any, b:any) => {
+    if (Number(a.TIME_24) > Number(b.TIME_24)) {
+      return 1;
+    }
+    if (a.TIME_24 < b.TIME_24) {
+      return -1;
+    }
+    // a must be equal to b
+    return 0;
+  }
+  )
+  
   const resultArray = [...todayData.map((ele)=> ele.TMP), ...tomorrowData.map((ele)=> ele.TMP)];
-  console.log(todayData, tomorrowData)
-  console.log(resultArray);
   return (
     <ChartContainer
     className=''

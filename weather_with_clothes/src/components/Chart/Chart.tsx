@@ -29,6 +29,7 @@ export default function BasicLineChart({ twentyFourHourData }) {
   )
   
   const resultArray = [...todayData.map((ele)=> ele.TMP), ...tomorrowData.map((ele)=> ele.TMP)];
+  
   return (
     <ChartContainer
     className=''

@@ -16,3 +16,6 @@ export const TODAY_FORCAST_END_POINT = "https://apis.data.go.kr/1360000/VilageFc
 // 예보구역코드, 발표시각의 조회 조건으로 예보일로부터 3일에서 10일까지 육상날씨정보를 조회하는 기능	
 // 이걸로는 오늘 날씨 기온(TMP), 비 구름(SKY), 강수확률(POP) 나타내면 될듯
 export const WEEK_LAND_FORCAST_END_POINT = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?";
+
+// 중기전망조회
+export const WEEK_SUMMARY_END_POINT = "http://apis.data.go.kr/1360000/MidFcstInfoService/getMidFcst?";

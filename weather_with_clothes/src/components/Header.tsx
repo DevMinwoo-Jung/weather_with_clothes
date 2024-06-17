@@ -37,7 +37,6 @@ const kakaoApiKey = import.meta.env.VITE_REACT_APP_KAKAO_ADMIN_KEY; // 카카오
       const data = response.data;
       // 주소 정보 추출 (필요한 정보를 추출하세요)
       const dongInfo = data.documents[0].address.region_3depth_name;
-      console.log(dongInfo);
       setEx(dongInfo)
       return dongInfo;
     } catch (error) {

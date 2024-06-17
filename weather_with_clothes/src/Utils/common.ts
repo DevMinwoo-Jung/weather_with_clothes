@@ -244,7 +244,6 @@ function compareGPSTimes(time1, time2) {
 
 function convertDataToTimeObject(data) {
   const convertedData = {};
-  console.log(data)
   data.forEach(ele => {
     if (!convertedData[ele.fcstTime]) {
       convertedData[ele.fcstTime] = {};

@@ -4,8 +4,18 @@ import { beobjungdong } from '../Utils/beobjungdong';
 import { Ibeobjungdong } from '../Utils/dataType';
 import { BsSearch } from 'react-icons/bs';
 import { getTodayFullDate } from '../Utils/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateLocation } from '../features/locationSlice';
 
 export default function Search({setSearchKeyword, setDong}) {
+
+  const dispatch = useDispatch();
+
+  const changeLocation = (value) => {
+    dispatch(updateLocation(value));
+  };
+
+
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [result, setResult] = useState<any>([]);
 
@@ -16,6 +26,8 @@ export default function Search({setSearchKeyword, setDong}) {
   const getResult = () => {
     if(searchTerm.length > 1) {
       setResult(beobjungdong.filter((ele) => ele.ctgg_nm !== ele.lgdng_nm).filter((ele:any) => ele.lgdng_nm.includes(searchTerm)));
+      console.log(beobjungdong.filter((ele) => ele.ctgg_nm !== ele.lgdng_nm))
+      console.log(beobjungdong.filter((ele) => ele.ctgg_nm !== ele.lgdng_nm).filter((ele:any) => ele.lgdng_nm.includes(searchTerm)))
     } else if (searchTerm.length <= 1){
       setResult([]);
     }
@@ -39,6 +51,8 @@ export default function Search({setSearchKeyword, setDong}) {
     }
     setDong(event.currentTarget.getAttribute('data-lgdng_nm'))
     setSearchKeyword(searchParam);
+
+    changeLocation(searchResult["1단계"])
   }
 
   return (

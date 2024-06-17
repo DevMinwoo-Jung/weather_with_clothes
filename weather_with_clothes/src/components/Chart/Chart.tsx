@@ -8,7 +8,6 @@ import {
 } from '@mui/x-charts/LineChart';
 
 export default function BasicLineChart({ twentyFourHourData }) {
-  console.log(twentyFourHourData); // 데이터 구조를 확인하기 위해 로그 출력
 
   if (!twentyFourHourData.arrayLength) {
     return <div>Data is not available</div>;
@@ -29,7 +28,7 @@ export default function BasicLineChart({ twentyFourHourData }) {
   )
   
   const resultArray = [...todayData.map((ele)=> ele.TMP), ...tomorrowData.map((ele)=> ele.TMP)];
-  
+
   return (
     <ChartContainer
     className=''

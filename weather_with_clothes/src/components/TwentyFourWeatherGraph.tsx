@@ -14,7 +14,7 @@ export default function TwentyFourWeatherGraph(props) {
 
 
   return (
-    <div className='pt-2 pb-2 pl-6 pr-6 rounded-2xl h-56 border-2'>
+    <div className='pt-2 pb-2 pl-6 pr-6 rounded-2xl h-52 border-2'>
       {/* <p className='mb-2'>밤에도 맑은 날씨가 이어져요</p> */}
       <div className='mb-2'></div>
       <div className='flex overflow-x-scroll no-scrollbar whitespace-nowrap'>

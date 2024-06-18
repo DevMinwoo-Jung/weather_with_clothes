@@ -10,6 +10,8 @@ export default function Main({todayData}) {
   const nowTemp = todayData.filter(ele=> ele.fcstDate === FULL_TODAY && ele.category === "TMP" && Number(ele.fcstTime.slice(0,2)) === new Date().getHours())[0].fcstValue;
   let nowCloud = todayData.filter(ele=> ele.fcstDate === FULL_TODAY && ele.category === "SKY" && Number(ele.fcstTime.slice(0,2)) === new Date().getHours())[0].fcstValue;
   let nowForcast = todayData.filter(ele=> ele.fcstDate === FULL_TODAY && ele.category === "PTY" && Number(ele.fcstTime.slice(0,2)) === new Date().getHours())[0].fcstValue;
+  let forcastSummary = "";
+  console.log(nowForcast)
 
   if(nowCloud < 6){
     nowCloud = "맑음";
@@ -22,18 +24,27 @@ export default function Main({todayData}) {
   switch (Number(nowForcast)) {
     case 1:
       nowForcast = "비";
+      forcastSummary = "오늘은 비가와요, 우산을 챙기는게 좋겠어요";
       break;
     case 2:
       nowForcast = "비/눈";
+      forcastSummary = "오늘은 비가와요, 우산을 챙기는게 좋겠어요";
       break;
     case 3:
       nowForcast = "눈";
+      forcastSummary = "오늘은 눈이와요";
       break;
     case 4:
       nowForcast = "소나기";
+      forcastSummary = "오늘은 곳곳에 소나기가 와요, 우산을 챙기는게 좋겠어요";
     break;
     default:
+      forcastSummary = "오늘은 날씨가 화창해요";
       break;
+  }
+
+  if(nowForcast === 2 && Number(todayMaxTemp) > 5){
+    forcastSummary = "오늘은 눈이와요";
   }
 
 
@@ -49,8 +60,7 @@ export default function Main({todayData}) {
       </div>
       <div className='block'>
         <div className=''>
-          <p>오늘은 외투챙겨요</p>
-          <p>비와요 우산챙겨요</p>
+            <p className='mt-4'>{forcastSummary}</p>
         </div>
         <div className='mt-3 flex'>
           <TempClothes MaxTemp={todayMaxTemp}/>

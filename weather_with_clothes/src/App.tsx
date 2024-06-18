@@ -68,8 +68,8 @@ function App() {
                 <Header userLocation={userLocation} dong={dong} />
                 <Main todayData={data?.fullData} />
                 <TwentyFourWeatherGraph twentyFourHourData={twentyFourHourData} />
-                <Summary />
                 <WeekSummary threeDaysWeatherData={threeDaysWeatherData} />
+                <Summary />
             </div>
             <div>
             </div>

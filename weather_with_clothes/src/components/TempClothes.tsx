@@ -7,7 +7,7 @@ export default function TempClothes({MaxTemp}) {
 
   useEffect(()=>{
     if (MaxTemp > 28){
-      setRecommendClothes("민소매, 반팔, 반바지, 짧은치마, 린넨 옷");
+      setRecommendClothes("민소매, 반팔, 반바지,린넨, 짧은치마");
     } else if (MaxTemp < 28 ){
       setRecommendClothes("반팔, 얇은 셔츠, 반바지, 면바지")
     } else if (MaxTemp < 23) {
@@ -28,6 +28,6 @@ export default function TempClothes({MaxTemp}) {
 
 
   return (
-    <p>오늘은 {recommendClothes}</p>
+    <p>{recommendClothes}가 좋겠어요</p>
   )
 }

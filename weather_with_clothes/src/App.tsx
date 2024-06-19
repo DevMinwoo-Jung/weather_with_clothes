@@ -81,7 +81,7 @@ export default App;
 
 
 function getNearNumber(value, compareArr, flag) {
-	let nearestValue = null;
+	let nearestValue = 0;
 	let minDifference = Infinity;
 
 	compareArr.forEach((ele) => {

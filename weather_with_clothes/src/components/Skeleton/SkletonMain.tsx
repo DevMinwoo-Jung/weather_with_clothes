@@ -20,19 +20,17 @@ export default function SkletonMain() {
     </div>
     <div className='flex h-12'>
       <div className='cursor-pointer mr-6'><Home size="medium"/></div>
-      <div className='text-2xl leading-10'>상봉동</div>
+      <div className='text-2xl leading-10'></div>
     </div>
     <div className='flex mt-8 h-48'>
       <div className='block w-1/2'>
       <LoadingSpinner/>
       </div>
       <div className='w-1/2'>
-        <p>오늘은 외투챙겨요</p>
-        <p>비와요 우산챙겨요</p> 
       </div>
     </div>
     <div className='pt-2 pb-2 pl-6 pr-6 rounded-2xl h-40 border-2'>
-      <p className='mb-2'>밤에도 맑은 날씨가 이어져요</p>
+      <p className='mb-2'></p>
       <div className='border-t-2 mb-2'></div>
       <div className='flex overflow-x-scroll no-scrollbar whitespace-nowrap'>
       <LoadingSpinner/>

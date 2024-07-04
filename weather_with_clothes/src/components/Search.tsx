@@ -26,8 +26,6 @@ export default function Search({setSearchKeyword, setDong}) {
   const getResult = () => {
     if(searchTerm.length > 1) {
       setResult(beobjungdong.filter((ele) => ele.ctgg_nm !== ele.lgdng_nm).filter((ele:any) => ele.lgdng_nm.includes(searchTerm)));
-      console.log(beobjungdong.filter((ele) => ele.ctgg_nm !== ele.lgdng_nm))
-      console.log(beobjungdong.filter((ele) => ele.ctgg_nm !== ele.lgdng_nm).filter((ele:any) => ele.lgdng_nm.includes(searchTerm)))
     } else if (searchTerm.length <= 1){
       setResult([]);
     }
@@ -40,7 +38,6 @@ export default function Search({setSearchKeyword, setDong}) {
     const dataValue3 = event.currentTarget.getAttribute('data-region_3tear').slice(0,2);
 
     const searchResult = hangjungdong.filter((ele) => ele["1단계"].includes(dataValue1)&& ele["2단계"].includes(dataValue2) && ele["3단계"].includes(dataValue3))[0]
-    console.log(searchResult)
     const searchParam = {
       pageNo: "1",
       numOfRows: "1000",

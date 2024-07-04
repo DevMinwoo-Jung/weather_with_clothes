@@ -28,8 +28,6 @@ const locationSlice = createSlice({
       } else {
         state.location = "108"
       }
-
-      console.log(state.location)
     },
   },
 });

@@ -11,7 +11,6 @@ export default function Main({todayData}) {
   let nowCloud = todayData.filter(ele=> ele.fcstDate === FULL_TODAY && ele.category === "SKY" && Number(ele.fcstTime.slice(0,2)) === new Date().getHours())[0].fcstValue;
   let nowForcast = todayData.filter(ele=> ele.fcstDate === FULL_TODAY && ele.category === "PTY" && Number(ele.fcstTime.slice(0,2)) === new Date().getHours())[0].fcstValue;
   let forcastSummary = "";
-  console.log(nowForcast)
 
   if(nowCloud < 6){
     nowCloud = "맑음";

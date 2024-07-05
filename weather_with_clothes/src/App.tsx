@@ -16,9 +16,9 @@ import ChartExample from './components/Chart/Chart';
 
 function App() {
     const userLocation = useGeolocation();
-    const [searchKeyword, setSearchKeyword] = useState(null);
+    const [searchKeyword, setSearchKeyword] = useState<{}>({});
     const [dong, setDong] = useState<any>(null);
-		const [defaultDong, setDefaultDong] = useState(null)
+	const [defaultDong, setDefaultDong] = useState(null)
 
     useEffect(() => {
         if (userLocation) {

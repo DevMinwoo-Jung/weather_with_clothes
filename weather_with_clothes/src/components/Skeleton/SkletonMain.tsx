@@ -22,7 +22,7 @@ export default function SkletonMain() {
       <div className='cursor-pointer mr-6'><Home size="medium"/></div>
       <div className='text-2xl leading-10'></div>
     </div>
-    <div className='flex mt-8 h-48'>
+    <div className='flex mt-8 h-52'>
       <div className='block w-1/2'>
       <LoadingSpinner/>
       </div>
@@ -36,8 +36,10 @@ export default function SkletonMain() {
       <LoadingSpinner/>
       </div>
     </div>
-    <section className='mt-4 p-2 rounded-2xl	border-2'>Summary</section>
-		<div className='mt-4 p-2 rounded-2xl border-2 flex'>
+    <section className='mt-4 p-2 rounded-2xl	border-2'>
+      <LoadingSpinner/>
+    </section>
+		<div className='h-34 mt-4 p-2 rounded-2xl border-2 flex'>
       <LoadingSpinner/>
 		</div>
     </div>

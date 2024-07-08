@@ -4,7 +4,7 @@ import { beobjungdong } from '../Utils/beobjungdong';
 import { Ibeobjungdong } from '../Utils/dataType';
 import { BsSearch } from 'react-icons/bs';
 import { getTodayFullDate } from '../Utils/common';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateLocation } from '../features/locationSlice';
 
 export default function Search({setSearchKeyword, setDong}) {
@@ -66,7 +66,7 @@ export default function Search({setSearchKeyword, setDong}) {
         />
       </div>
       <ul className='mt-2 z-10 w-full max-h-40  scroll-my-2 overflow-y-auto'>
-        {result.map((item:Ibeobjungdong, index) => (
+        {result.map((item:Ibeobjungdong) => (
           <div className='block max-h-20' onClick={convertToHangjungdong} 
             data-region_1tear={item.ctpv_nm} data-region_2tear={item.ctgg_nm} 
             data-region_3tear={item.adstrd_nm} data-code={item.adstrd_cd}

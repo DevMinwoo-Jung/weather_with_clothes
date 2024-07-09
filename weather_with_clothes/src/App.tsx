@@ -70,8 +70,6 @@ function App() {
                 <WeekSummary threeDaysWeatherData={threeDaysWeatherData} />
                 <Summary />
             </div>
-            <div>
-            </div>
         </div>
     );
 }

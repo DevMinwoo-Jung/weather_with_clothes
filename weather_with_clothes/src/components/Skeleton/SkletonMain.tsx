@@ -1,18 +1,25 @@
 import React from 'react'
 import Home from '../Icons/Home'
 import { Skeleton } from '@mui/material'
+import { BsSearch } from 'react-icons/bs'
 
 export default function SkletonMain() {
   return (
     <div className='min-w-screen min-h-screen bg-slate-500 text-white font-bold'>
     <div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl relative'>
     <div className='right-2 absolute'>
-      <div className='flex'> 
-      </div>
+        <div className='flex'> 
+          <BsSearch className='absolute left-1 text-black top-1'/>
+          <input 
+            type="text" 
+            placeholder="우리 동네 찾기" 
+            className='pl-6 left-5 text-black font-light leading-1 rounded-md'
+          />
+        </div>
     </div>
     <div className='flex h-12'>
-      <div className='cursor-pointer mr-6'><Home size="medium"/></div>
-      <div className='text-2xl leading-10'></div>
+      <div className='cursor-pointer mr-6 flex'><Home size="medium"/></div>
+      <div className='text-2xl'><Skeleton animation="wave" variant="rectangular" width={80} height={40}/></div>
     </div>
     <div className='flex mt-8 min-h-48'>
       <div className='block w-1/2'>

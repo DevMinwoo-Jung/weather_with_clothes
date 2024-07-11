@@ -8,7 +8,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        fontWhite: "#FFFFFF"
+        fontWhite: "#FFFFFF",
+        colorMain: "#DCF2F1",
+        colorFrame: "#7FC7D9",
+        colorText: "#365486",
+        colorHighLight: "#0F1035"
       }
     },
     'mobile': '375px',

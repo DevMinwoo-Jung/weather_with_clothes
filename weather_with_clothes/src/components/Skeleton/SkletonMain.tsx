@@ -5,15 +5,15 @@ import { BsSearch } from 'react-icons/bs'
 
 export default function SkletonMain() {
   return (
-    <div className='min-w-screen min-h-screen bg-slate-500 text-white font-bold'>
-    <div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl relative'>
+    <div className='min-w-screen min-h-screen text-colorText font-bold'>
+    <div className='mobile:w-1/3 sm:w-2/3 mx-auto p-4 max-w-xl relative bg-colorMain border-2 rounded-lg border-colorHighLight border-opacity-60 m-2'>
     <div className='right-2 absolute'>
         <div className='flex'> 
-          <BsSearch className='absolute left-1 text-black top-1'/>
+          <BsSearch className='absolute left-1 text-colorText top-1'/>
           <input 
             type="text" 
             placeholder="우리 동네 찾기" 
-            className='pl-6 left-5 text-black font-light leading-1 rounded-md'
+            className='pl-6 left-5 text-colorText font-light leading-1 rounded-md'
           />
         </div>
     </div>

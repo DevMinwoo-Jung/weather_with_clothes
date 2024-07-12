@@ -55,14 +55,14 @@ export default function Search({setSearchKeyword, setDong}) {
   return (
     <div className='right-2 absolute'>
       <div className='flex'> 
-        <BsSearch className='absolute left-1 text-black top-1'/>
+        <BsSearch className='absolute left-1 text-colorText top-1'/>
         <input 
           type="text" 
           value={searchTerm} 
           onChange={handleSearch} 
           onKeyUp={getResult} 
           placeholder="우리 동네 찾기" 
-          className='pl-6 left-5 text-black font-light leading-1 rounded-md'
+          className='pl-6 left-5 text-colorText font-light leading-1 rounded-md'
         />
       </div>
       <ul className='mt-2 z-10 w-full max-h-40  scroll-my-2 overflow-y-auto'>
@@ -72,7 +72,7 @@ export default function Search({setSearchKeyword, setDong}) {
             data-region_3tear={item.adstrd_nm} data-code={item.adstrd_cd}
             data-lgdng_nm={item.lgdng_nm}
           key={item.admn_inst_cd}>
-            <div className='rounded-md border-solid bg-slate-800 border-2 m-1'>
+            <div className='rounded-md border-solid bg-colorFrame border-2 '>
               <div className='flex'>
                 <li className='ml-2 font-extrabold' key={Math.random()}>{item.lgdng_nm}</li>
                 <li className='ml-2 font-extrabold' key={Math.random()}>({item.adstrd_nm})</li>

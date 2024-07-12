@@ -61,8 +61,8 @@ function App() {
     if (error) return <div>Error</div>;
 
     return (
-        <div className='min-w-screen min-h-screen bg-slate-500 text-white font-bold'>
-            <div className='mobile:w-1/3 sm:w-2/3 m-auto p-4 max-w-xl relative'>
+        <div className='min-w-screen min-h-screen text-colorText font-bold'>
+            <div className='mobile:w-1/3 sm:w-2/3 mx-auto p-4 max-w-xl relative bg-colorMain border-2 rounded-lg border-colorHighLight border-opacity-60 m-2'>
                 <Search setSearchKeyword={setSearchKeyword} setDong={setDong} />
                 <Header userLocation={userLocation} dong={dong} />
                 <Main todayData={data?.fullData} />

@@ -37,6 +37,6 @@ export default function Summary() {
   if (error) return <div>Error</div>;
 
   return (
-    <section className='mt-4 p-2 rounded-2xl	border-2 whitespace-pre-line'>{weekSummary}</section>
+    <section className='mt-4 p-2 rounded-2xl	border-2 whitespace-pre-line border-colorFrame'>{weekSummary}</section>
   )
 }

@@ -62,7 +62,7 @@ export default function Search({setSearchKeyword, setDong}) {
           onChange={handleSearch} 
           onKeyUp={getResult} 
           placeholder="우리 동네 찾기" 
-          className='pl-6 left-5 text-colorText font-light leading-1 rounded-md'
+          className='pl-6 left-5 text-colorText font-semibold leading-1 rounded-md'
         />
       </div>
       <ul className='mt-2 z-10 w-full max-h-40  scroll-my-2 overflow-y-auto'>

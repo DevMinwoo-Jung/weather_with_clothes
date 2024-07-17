@@ -13,7 +13,7 @@ export default function SkletonMain() {
           <input 
             type="text" 
             placeholder="우리 동네 찾기" 
-            className='pl-6 left-5 text-colorText font-light leading-1 rounded-md'
+            className='pl-6 left-5 text-colorText font-semibold leading-1 rounded-md'
           />
         </div>
     </div>

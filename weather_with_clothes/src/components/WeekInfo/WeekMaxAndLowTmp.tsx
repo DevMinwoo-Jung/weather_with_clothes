@@ -58,7 +58,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 							.map((ele: any, index: any) => {
 								return (
 									<>
-										<p key={Math.random()} className='mr-2 h-7'>
+										<p key={Math.random()} className='pr-2 mr-2 h-7'>
 											{ele}°
 										</p>
 									</>

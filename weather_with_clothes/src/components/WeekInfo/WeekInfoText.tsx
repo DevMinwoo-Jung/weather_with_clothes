@@ -19,10 +19,8 @@ export default function WeekInfoText({ props }) {
           <Weather key={Math.random()} condition={{"SKY": SKY.PM, "PTY": PTY.PM}}/>
         </span>
       </div>
-			<span className='pr-4'>{Math.round(MAX)}°</span>
-			<span className='pr-1'>{Math.round(MIN)}°</span>
-			{/* <span className='pr-1'>{TMX}</span>
-			<span className='pr-1'>{TMN}</span> */}
+			<p className='w-9 mr-1 h-7'>{Math.round(MAX)}°</p>
+			<p className='w-9 ml-4 h-7'>{Math.round(MIN)}°</p>
 		</div>
 	);
 }

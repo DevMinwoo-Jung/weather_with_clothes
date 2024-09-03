@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { todayInfoDefaultParam, useTodayWeatherInfo } from '../API/weather';
-import { getTwentyHours, threeDaysWeatherInfo } from '../Utils/common';
+import React from 'react';
 import Hour from './Hour/Hour';
 import ChartExample from './Chart/Chart';
 
 export default function TwentyFourWeatherGraph(props) {
 
   const { twentyFourHourData } = props;
-
-  if (!twentyFourHourData) {
-    return <div>Loading...</div>; // 데이터가 없는 경우 로딩 상태를 표시
-  }
 
 
   return (

@@ -39,8 +39,6 @@ export default function WeekSummary(props) {
 		}
 	}, [data, status, weekInfoData, weekInfoStatus]);
 
-	if (isPending) return <LoadingSpinner/>;
-
 	if (error) return <div>Error</div>;
 	return (
 		<div className='mt-4 p-2 rounded-2xl border-2 flex border-colorFrame'>

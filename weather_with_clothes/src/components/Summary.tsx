@@ -32,8 +32,6 @@ export default function Summary() {
       }
   }, [status]);
 
-  if (isPending) return "";
-
   if (error) return <div>Error</div>;
 
   return (

@@ -8,7 +8,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 	return (
 		<>
 			{weekData && weekInformationData && (
-				<div className='flex'>
+				<div className='w-full justify-end flex'>
 					<div className='pr-2' key={Math.random()}>
 						{weekInformationData.rainParis
 							.slice(0, 4)

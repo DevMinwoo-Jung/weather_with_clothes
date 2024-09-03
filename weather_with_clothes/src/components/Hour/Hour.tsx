@@ -29,7 +29,7 @@ export default function Hour(props:HourType) {
       {Object.values(type).map((data: any, index) => {
         const { POP, TMP, REH, TIME } = data;
           return (
-            <div className='mr-2 text-center' key={index}> {/* 각각의 요소에 key 추가 */}
+            <div className='w-11 mr-2 text-center' key={index}> {/* 각각의 요소에 key 추가 */}
               <span className='text-sm'>{TIME}</span>
               <p>{REH}</p>
               <p>{POP}%</p> 

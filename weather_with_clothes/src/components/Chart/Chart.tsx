@@ -32,7 +32,7 @@ export default function BasicLineChart({ twentyFourHourData }) {
   return (
     <ChartContainer
     className=''
-    width={1250}
+    width={1280}
     height={120}
     margin={{
       left: 10,

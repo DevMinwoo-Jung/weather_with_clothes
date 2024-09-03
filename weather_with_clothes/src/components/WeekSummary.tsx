@@ -42,9 +42,11 @@ export default function WeekSummary(props) {
 	if (error) return <div>Error</div>;
 	return (
 		<div className='mt-4 p-2 rounded-2xl border-2 flex border-colorFrame'>
-			<WeekInfoDays />
+			<div className='w-1/4'>
+				<WeekInfoDays/>
+			</div>
 			{threeDaysWeatherData && (
-				<div className='block'>
+				<div className='block w-3/4 justify-end'>
 					<WeekInfoText props={threeDaysWeatherData.todayInfo} />
 					<WeekInfoText props={threeDaysWeatherData.tomorrowInfo} />
 					<WeekInfoText props={threeDaysWeatherData.threeDaysLaterInfo} />

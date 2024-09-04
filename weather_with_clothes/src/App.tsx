@@ -44,10 +44,10 @@ function App() {
 
     useEffect(() => {
         if (status === 'success' && data) {
-            const example = getTwentyHours(data.resultData);
-            const ex2 = threeDaysWeatherInfo(data.fullData);
-            setTwentyFourHourData(example);
-            setThreeDaysWeatherData(ex2);
+            const twentyFourHourDataResult = getTwentyHours(data.resultData);
+            const threeDaysWeatherInfoResult:any = threeDaysWeatherInfo(data.fullData);
+            setTwentyFourHourData(twentyFourHourDataResult);
+            setThreeDaysWeatherData(threeDaysWeatherInfoResult);
 			let hangjungdongArr = hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]))); 
 			const x = getNearNumber(searchKeyword!["latitude"], hangjungdongArr, "위도(초/100)");
 			const y = getNearNumber(searchKeyword!["longitude"], hangjungdongArr, "경도(초/100)");

@@ -18,7 +18,7 @@ export default function SkletonMain() {
         </div>
     </div>
     <div className='flex h-12'>
-      <div className='cursor-pointer mr-6 flex'><Home size="medium"/></div>
+      {/* <div className='cursor-pointer mr-6 flex'><Home size="medium"/></div> */}
       <div className='text-2xl'><Skeleton animation="wave" variant="rectangular" width={80} height={40}/></div>
     </div>
     <div className='flex mt-8 min-h-48'>

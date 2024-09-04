@@ -42,7 +42,7 @@ export default function Main({todayData}) {
       break;
   }
 
-  if(nowForcast === 2 && Number(todayMaxTemp) > 5){
+  if(nowForcast === 2 && Number(todayMaxTemp) < 5){
     forcastSummary = "오늘은 눈이와요";
   }
 

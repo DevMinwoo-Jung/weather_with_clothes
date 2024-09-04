@@ -35,7 +35,7 @@ const kakaoApiKey = import.meta.env.VITE_REACT_APP_KAKAO_ADMIN_KEY; // 카카오
   };
   return (
     <div className='flex h-12'>
-      <div className='mr-6'><Home size="medium"/></div>
+      {/* <div className='mr-6'><Home size="medium"/></div> */}
       {
         dong === null ? <div className='text-2xl leading-10'>{ex}</div> : <div className='text-2xl leading-10'>{dong}</div>
       }

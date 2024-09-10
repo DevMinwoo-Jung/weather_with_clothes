@@ -21,7 +21,7 @@ export default function Summary() {
   }, [])
   
 
-  const { isPending, status, data, error } = useWeekSummay(region);
+  const { status, data, error } = useWeekSummay(region);
 
   const [weekSummary, setWeekSummary] = useState(null);
 

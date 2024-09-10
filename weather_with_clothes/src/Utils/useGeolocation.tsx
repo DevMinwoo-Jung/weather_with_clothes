@@ -73,6 +73,8 @@ function useGeolocation() {
                     setUserLocation(dfs_xy_conv("toXY", latitude, longitude));
                 },
                 (error) => {
+                    // 37.5928046 127.0753468
+                    setUserLocation(dfs_xy_conv("toXY", 37.5928046, 127.0753468));
                     console.error('Error getting user location:', error);
                 }
             );

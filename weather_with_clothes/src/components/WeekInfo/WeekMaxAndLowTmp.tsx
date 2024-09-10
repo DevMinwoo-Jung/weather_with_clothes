@@ -39,31 +39,33 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 								);
 							})}
 					</div>
-					<div className='block' key={Math.random()}>
-						{Object.values(weekData.maxTempData)
-							.slice(0, 4)
-							.map((ele: any, index: any) => {
-								return (
-									<>
-										<p key={Math.random()} className='pr-2 mr-2 h-7'>
-											{ele}°
-										</p>
-									</>
-								);
-							})}
-					</div>
-					<div className='block' key={Math.random()}>
-						{Object.values(weekData.lowTempData)
-							.slice(0, 4)
-							.map((ele: any, index: any) => {
-								return (
-									<>
-										<p key={Math.random()} className='pr-2 mr-2 h-7'>
-											{ele}°
-										</p>
-									</>
-								);
-							})}
+					<div className='flex'>
+						<div className='block' key={Math.random()}>
+							{Object.values(weekData.maxTempData)
+								.slice(0, 4)
+								.map((ele: any, index: any) => {
+									return (
+										<>
+											<p key={Math.random()} className='pr-2 mr-2 h-7'>
+												{ele}°
+											</p>
+										</>
+									);
+								})}
+						</div>
+						<div className='block' key={Math.random()}>
+							{Object.values(weekData.lowTempData)
+								.slice(0, 4)
+								.map((ele: any, index: any) => {
+									return (
+										<>
+											<p key={Math.random()} className='pr-2 mr-2 h-7'>
+												{ele}°
+											</p>
+										</>
+									);
+								})}
+						</div>
 					</div>
 				</div>
 			)}

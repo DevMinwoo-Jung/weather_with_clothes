@@ -18,7 +18,7 @@ export default function Hour(props:HourType) {
       }
       if (a.TIME_24 < b.TIME_24) {
         return -1;
-      }
+      } 
       // a must be equal to b
       return 0;
     }

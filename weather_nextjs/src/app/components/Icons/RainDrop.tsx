@@ -3,7 +3,7 @@ import WaterDropIcon  from '@mui/icons-material/WaterDrop';
 import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined';
 import WaterDropTwoToneIcon from '@mui/icons-material/WaterDropTwoTone';
 
-export default function RainDrop({percent}) {
+export default function RainDrop({percent}:any) {
   
   let raindropIcon:any = "";
 

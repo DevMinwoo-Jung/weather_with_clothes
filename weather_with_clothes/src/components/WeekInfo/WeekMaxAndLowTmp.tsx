@@ -1,6 +1,4 @@
 import React from 'react';
-import WaterDropIcon from '@mui/icons-material/WaterDrop';
-import WaterDropRoundedIcon from '@mui/icons-material/WaterDropRounded';
 import RainDrop from '../Icons/RainDrop';
 import Weather from '../Icons/Weather';
 
@@ -8,8 +6,8 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 	return (
 		<>
 			{weekData && weekInformationData && (
-				<div className='w-full justify-between flex'>
-					<div className='min-w-20 pr-2' key={Math.random()}>
+				<div className='w-[390px] flex'>
+					<div className='w-[72px] mr-[80px]' key={Math.random()}>
 						{weekInformationData.rainParis
 							.slice(0, 4)
 							.map((ele: any, index: number) => {
@@ -23,7 +21,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 								);
 							})}
 					</div>
-					<div>
+					<div className='w-[75px] md:pr-10 mr-[90px]'>
 						{Object.values(weekInformationData.weatherPairs)
 							.slice(0, 4)
 							.map((ele: any, index: number) => {
@@ -46,7 +44,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 								.map((ele: any, index: any) => {
 									return (
 										<>
-											<p key={Math.random()} className='pr-2 mr-2 h-7'>
+											<p key={Math.random()} className='w-3 mr-8 h-7'>
 												{ele}°
 											</p>
 										</>
@@ -59,7 +57,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 								.map((ele: any, index: any) => {
 									return (
 										<>
-											<p key={Math.random()} className='pr-2 mr-2 h-7'>
+											<p key={Math.random()} className='w-3 mr-2 h-7'>
 												{ele}°
 											</p>
 										</>

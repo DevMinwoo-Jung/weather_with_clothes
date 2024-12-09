@@ -11,7 +11,7 @@ import WeekInfoText from './WeekInfo/WeekInfoText';
 import WeekMaxAndLowTmp from './WeekInfo/WeekMaxAndLowTmp';
 import LoadingSpinner from './Skeleton/LoadingSpinner';
 
-export default function WeekSummary(props) {
+export default function WeekSummary(props: { threeDaysWeatherData: any; }) {
 	const { isPending, status, data, error, isFetching } = useShortLiveWeather(
 		shortLiveWeatherdefaultParam
 	);
@@ -60,7 +60,7 @@ export default function WeekSummary(props) {
 	);
 }
 
-function renderSeparatedObjects(obj) {
+function renderSeparatedObjects(obj:any) {
 	const rnStPairs: any = [];
 	const rainParis: any = [];
 	const wfPairs: any = [];

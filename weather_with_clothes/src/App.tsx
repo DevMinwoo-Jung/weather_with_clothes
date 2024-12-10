@@ -32,19 +32,6 @@ function App() {
 				longitude: userLocation.lng
             });
         } 
-        else {
-            setSearchKeyword({
-                pageNo: "1",
-                numOfRows: "1000",
-                base_date: getTodayFullDate(),
-                base_time: "0500",
-                nx: 61,
-                ny: 127,
-				latitude: 37.5928046,
-				longitude: 127.0753468
-            });
-        }
-
 
     }, [userLocation]);
 

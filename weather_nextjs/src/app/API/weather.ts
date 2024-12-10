@@ -117,8 +117,6 @@ export const fetchDailyWeatherInfo = async (dailyInfoDefaultParam:dailyWeatherIn
   export const fetchTodayWeatherInfo = async (todayInfoDefaultParam:todayWeatherInfoParam) => {
   
     const { numOfRows, pageNo, base_date, base_time, nx, ny} = todayInfoDefaultParam;
-
-    console.log(todayInfoDefaultParam)
     
       const res = await fetch(
         `${TODAY_FORCAST_END_POINT}serviceKey=${SERVICE_KEY}&pageNo=${pageNo}&numOfRows=${numOfRows}&dataType=JSON&base_date=${base_date}&base_time=${base_time}&nx=${nx}&ny=${ny}

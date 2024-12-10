@@ -31,12 +31,24 @@ function App() {
 				latitude: userLocation.lat,
 				longitude: userLocation.lng
             });
+        } 
+        else {
+            setSearchKeyword({
+                pageNo: "1",
+                numOfRows: "1000",
+                base_date: getTodayFullDate(),
+                base_time: "0500",
+                nx: 61,
+                ny: 127,
+				latitude: 37.5928046,
+				longitude: 127.0753468
+            });
         }
 
 
     }, [userLocation]);
 
-    const { isPending, status, data, error } = useTodayWeatherInfo(searchKeyword ? searchKeyword : undefined);
+    const { isPending, status, data, error } = useTodayWeatherInfo(searchKeyword);
 
     const [twentyFourHourData, setTwentyFourHourData] = useState(null);
     const [threeDaysWeatherData, setThreeDaysWeatherData] = useState(null);
@@ -48,11 +60,7 @@ function App() {
             const threeDaysWeatherInfoResult:any = threeDaysWeatherInfo(data.fullData);
             setTwentyFourHourData(twentyFourHourDataResult);
             setThreeDaysWeatherData(threeDaysWeatherInfoResult);
-			let hangjungdongArr = hangjungdong.filter((ele)=> ((ele["격자 X"] == searchKeyword!["nx"]) && (ele["격자 Y"] == searchKeyword!["ny"]))); 
-			const x = getNearNumber(searchKeyword!["latitude"], hangjungdongArr, "위도(초/100)");
-			const y = getNearNumber(searchKeyword!["longitude"], hangjungdongArr, "경도(초/100)");
 			setDefaultDong(searchKeyword);
-					
         }
     }, [data, status]);
 

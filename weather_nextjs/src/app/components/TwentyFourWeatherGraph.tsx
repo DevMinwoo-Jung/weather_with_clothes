@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { todayInfoDefaultParam, useTodayWeatherInfo } from '../API/weather';
-import { getTwentyHours, threeDaysWeatherInfo } from '../Utils/common';
+import React from 'react';
 import Hour from './Hour/Hour';
 import ChartExample from './Chart/Chart';
 

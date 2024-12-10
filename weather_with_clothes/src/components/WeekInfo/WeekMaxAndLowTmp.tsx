@@ -6,8 +6,8 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 	return (
 		<>
 			{weekData && weekInformationData && (
-				<div className='w-[390px] flex'>
-					<div className='w-[72px] mr-[80px]' key={Math.random()}>
+				<div className='md:w-[390px] w-[250px] flex' key={Math.random()}>
+					<div className='w-[72px] md:mr-[80px] mr-[15px]'>
 						{weekInformationData.rainParis
 							.slice(0, 4)
 							.map((ele: any, index: number) => {
@@ -21,7 +21,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 								);
 							})}
 					</div>
-					<div className='w-[75px] md:pr-10 mr-[90px]'>
+					<div className='w-[75px] md:mr-[80px] mr-[10px]'>
 						{Object.values(weekInformationData.weatherPairs)
 							.slice(0, 4)
 							.map((ele: any, index: number) => {
@@ -44,7 +44,7 @@ export default function WeekMaxAndLowTmp({ weekData, weekInformationData }) {
 								.map((ele: any, index: any) => {
 									return (
 										<>
-											<p key={Math.random()} className='w-3 mr-8 h-7'>
+											<p key={Math.random()} className='w-3 md:mr-8 mr-6 h-7'>
 												{ele}°
 											</p>
 										</>

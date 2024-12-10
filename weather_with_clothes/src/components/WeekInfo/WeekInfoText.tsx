@@ -6,8 +6,8 @@ export default function WeekInfoText({ props }) {
 	const { MAX, MIN, SKY, PTY, TMN, TMX, POP } = props;
 
 	return (
-		<div className='w-[390px] flex' key={Math.random()}>
-			<div className='w-[72px] mr-[80px]'>
+		<div className='md:w-[390px] w-[250px] flex' key={Math.random()}>
+			<div className='w-[72px] md:mr-[80px] mr-[15px]'>
         <div className='flex'>
           <p className='h-7 mr-2'>
             <RainDrop percent={POP}/>
@@ -15,7 +15,7 @@ export default function WeekInfoText({ props }) {
           </p>
         </div>
       </div>
-      <div className='w-[75px] flex md:pr-10 mr-[90px]'>
+      <div className='w-[75px] flex md:pr-10 md:mr-[80px] mr-[10px]'>
         <span className='mr-2 h-7 pt-1'>
           <Weather key={Math.random()} condition={{"SKY": SKY.AM, "PTY": PTY.AM}}/>
         </span>
@@ -25,10 +25,10 @@ export default function WeekInfoText({ props }) {
       </div>
       <div className='flex text-right'>
         <div className='block'>
-          <p className='w-3 mr-8 h-7'>{Math.round(MAX)}°</p>
+          <p className='w-3 md:mr-8 mr-6 h-7'>{Math.round(MAX)}°</p>
         </div>
         <div className='block'>
-          <p className='w-3 h-7'>{Math.round(MIN)}°</p>
+          <p className='w-3 mr-2 h-7'>{Math.round(MIN)}°</p>
         </div>
       </div>
 		</div>

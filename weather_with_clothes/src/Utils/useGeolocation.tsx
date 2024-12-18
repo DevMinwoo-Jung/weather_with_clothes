@@ -70,8 +70,7 @@ function useGeolocation() {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-//                    setUserLocation(dfs_xy_conv("toXY", latitude, longitude));
-                    setUserLocation(dfs_xy_conv("toXY", 37.5928046, 127.0753468));
+                    setUserLocation(dfs_xy_conv("toXY", latitude, longitude));
                 },
                 (error) => {
                     // 37.5928046 127.0753468
@@ -83,8 +82,6 @@ function useGeolocation() {
             console.error('Geolocation is not supported by this browser.');
         }
     };
-
-    console.log(userLocation)
 
     useEffect(() => {
         getUserLocation();

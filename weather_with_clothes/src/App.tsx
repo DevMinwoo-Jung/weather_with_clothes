@@ -11,7 +11,6 @@ import WeekSummary from './components/WeekSummary';
 import { getTodayFullDate, getTwentyHours, threeDaysWeatherInfo } from './Utils/common';
 import Search from './components/Search';
 import SkletonMain from './components/Skeleton/SkletonMain';
-import { hangjungdong } from './Utils/hangjungdong';
 
 function App() {
     const userLocation = useGeolocation();

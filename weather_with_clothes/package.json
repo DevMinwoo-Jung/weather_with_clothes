@@ -10,7 +10,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "start": "vite preview --host 0.0.0.0 --port 8080"
   },
   "dependencies": {
     "@mui/x-charts": "^7.5.1",
